@@ -1,0 +1,9 @@
+name: CustomItem_UNCLib
+version: '${project.version}'
+main: fr.teamunc.customitem_unclib.CustomItem_UNCLib
+api-version: 1.19
+prefix: UNC-CustomItem
+depend: [ Base_UNCLib ]
+authors: [ TeamUNC ]
+description: Custom Item Library for Team UNC Plugins
+website: team-unc.fr
