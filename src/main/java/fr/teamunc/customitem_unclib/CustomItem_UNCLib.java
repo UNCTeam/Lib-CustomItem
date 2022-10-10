@@ -7,7 +7,7 @@ public final class CustomItem_UNCLib extends JavaPlugin {
     @Override
     public void onEnable() {
         // Plugin startup logic
-
+        CustomItemLib.initGameListeners(this);
     }
 
     @Override

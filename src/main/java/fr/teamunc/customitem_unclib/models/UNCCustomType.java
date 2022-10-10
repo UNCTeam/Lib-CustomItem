@@ -32,13 +32,14 @@ public abstract class UNCCustomType {
         ArrayList<String> lore = new ArrayList<>(getLore());
 
 
-        res.setDisplayName(getName());
+        res.setDisplayName("§r" + getName());
         res.setCustomModelData(getModelData());
 
         // Durability
         NamespacedKey durabilityKey = CustomItemLib.getUNCCustomItemController().getCustomDurabilityNamespacedKey();
         res.getPersistentDataContainer().set(durabilityKey, PersistentDataType.INTEGER, getMaxDurability());
-        lore.add("Durability : " + getMaxDurability() + "/" + getMaxDurability());
+        lore.add("");
+        lore.add("§r§fDurability : §d§l" + getMaxDurability() + "§r§f/§d§l" + getMaxDurability());
 
         // Unbreakable
         NamespacedKey unbreakableKey = CustomItemLib.getUNCCustomItemController().getCustomUnbreakableNamespacedKey();

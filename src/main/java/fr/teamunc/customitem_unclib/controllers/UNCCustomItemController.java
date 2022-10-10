@@ -5,6 +5,7 @@ import fr.teamunc.customitem_unclib.models.UNCCustomType;
 import org.bukkit.NamespacedKey;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
+import org.bukkit.persistence.PersistentDataType;
 
 import java.util.HashMap;
 
@@ -58,5 +59,9 @@ public class UNCCustomItemController {
 
     public void giveCustomItem(Player player, String customKey, int amount) {
         player.getInventory().addItem(createCustomItem(customKey, amount));
+    }
+
+    public boolean isCustomItem(ItemStack item) {
+        return item.hasItemMeta() && item.getItemMeta().hasCustomModelData() && item.getItemMeta().getPersistentDataContainer().has(getCustomDurabilityNamespacedKey(), PersistentDataType.INTEGER);
     }
 }
