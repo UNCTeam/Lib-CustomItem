@@ -1,7 +1,7 @@
 package fr.teamunc.customitem_unclib.minecraft.eventlisteners;
 
-import fr.teamunc.base_unclib.utils.helpers.Message;
 import fr.teamunc.customitem_unclib.CustomItemLib;
+import fr.teamunc.customitem_unclib.models.CustomNamespaceKey;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.inventory.PrepareItemCraftEvent;
@@ -17,7 +17,11 @@ public class CraftListeners implements Listener {
             return;
         }
 
-        ItemStack customItem = Arrays.stream(event.getInventory().getMatrix()).filter(itemStack -> itemStack != null && CustomItemLib.getUNCCustomItemController().isCustomItem(itemStack)).findFirst().orElse(null);
+        ItemStack customItem = Arrays.stream(event.getInventory().getMatrix())
+                .filter(itemStack -> itemStack != null && CustomNamespaceKey.CUSTOM_DURABILITY.hasCustomData(itemStack))
+                .findFirst()
+                .orElse(null);
+
         if (customItem != null) {
             // if Material of the result is same as the material of the recipe
             if (customItem.getType() == event.getInventory().getResult().getType()) {

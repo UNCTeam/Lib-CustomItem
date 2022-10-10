@@ -36,18 +36,15 @@ public abstract class UNCCustomType {
         res.setCustomModelData(getModelData());
 
         // Durability
-        NamespacedKey durabilityKey = CustomItemLib.getUNCCustomItemController().getCustomDurabilityNamespacedKey();
-        res.getPersistentDataContainer().set(durabilityKey, PersistentDataType.INTEGER, getMaxDurability());
+        res.getPersistentDataContainer().set(CustomNamespaceKey.CUSTOM_DURABILITY.getNamespaceKey(), PersistentDataType.INTEGER, getMaxDurability());
         lore.add("");
         lore.add("§r§fDurability : §d§l" + getMaxDurability() + "§r§f/§d§l" + getMaxDurability());
 
         // Unbreakable
-        NamespacedKey unbreakableKey = CustomItemLib.getUNCCustomItemController().getCustomUnbreakableNamespacedKey();
-        res.getPersistentDataContainer().set(unbreakableKey, PersistentDataType.BYTE, (byte) (isUnbreakable() ? 1 : 0));
+        res.getPersistentDataContainer().set(CustomNamespaceKey.CUSTOM_UNBREAKABLE.getNamespaceKey(), PersistentDataType.BYTE, (byte) (isUnbreakable() ? 1 : 0));
 
         // CustomKey
-        NamespacedKey CustomTypeKey = CustomItemLib.getUNCCustomItemController().getCustomTypeNamespacedKey();
-        res.getPersistentDataContainer().set(CustomTypeKey, PersistentDataType.STRING, getCustomKey());
+        res.getPersistentDataContainer().set(CustomNamespaceKey.CUSTOM_TYPE.getNamespaceKey(), PersistentDataType.STRING, getCustomKey());
 
         // Final lore
         res.setLore(lore);

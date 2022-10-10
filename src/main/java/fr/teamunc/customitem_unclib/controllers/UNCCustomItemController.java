@@ -1,11 +1,12 @@
 package fr.teamunc.customitem_unclib.controllers;
 
-import fr.teamunc.customitem_unclib.CustomItemLib;
 import fr.teamunc.customitem_unclib.models.UNCCustomType;
+
+import org.bukkit.Bukkit;
 import org.bukkit.NamespacedKey;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
-import org.bukkit.persistence.PersistentDataType;
+import org.bukkit.inventory.Recipe;
 
 import java.util.HashMap;
 
@@ -25,6 +26,11 @@ public class UNCCustomItemController {
         }
     }
 
+    public void registerCraft(Recipe recipe, NamespacedKey namespacedKey, boolean replace) {
+        if (replace) Bukkit.getServer().removeRecipe(namespacedKey);
+        Bukkit.getServer().addRecipe(recipe);
+    }
+
     public ItemStack createCustomItem(String customKey, int amount) {
         if (customItemsMap.containsKey(customKey)) {
             return customItemsMap.get(customKey).createCustomItem(amount);
@@ -33,35 +39,7 @@ public class UNCCustomItemController {
         }
     }
 
-    public NamespacedKey getCustomTypeNamespacedKey() {
-        if (CustomItemLib.isInit()) {
-            return new NamespacedKey(CustomItemLib.getPlugin(), "custom_type");
-        } else {
-            throw new IllegalStateException("CustomItemLib is not initialized");
-        }
-    }
-
-    public NamespacedKey getCustomDurabilityNamespacedKey() {
-        if (CustomItemLib.isInit()) {
-            return new NamespacedKey(CustomItemLib.getPlugin(), "custom_durability");
-        } else {
-            throw new IllegalStateException("CustomItemLib is not initialized");
-        }
-    }
-
-    public NamespacedKey getCustomUnbreakableNamespacedKey() {
-        if (CustomItemLib.isInit()) {
-            return new NamespacedKey(CustomItemLib.getPlugin(), "custom_unbreakable");
-        } else {
-            throw new IllegalStateException("CustomItemLib is not initialized");
-        }
-    }
-
     public void giveCustomItem(Player player, String customKey, int amount) {
         player.getInventory().addItem(createCustomItem(customKey, amount));
-    }
-
-    public boolean isCustomItem(ItemStack item) {
-        return item.hasItemMeta() && item.getItemMeta().hasCustomModelData() && item.getItemMeta().getPersistentDataContainer().has(getCustomDurabilityNamespacedKey(), PersistentDataType.INTEGER);
     }
 }
