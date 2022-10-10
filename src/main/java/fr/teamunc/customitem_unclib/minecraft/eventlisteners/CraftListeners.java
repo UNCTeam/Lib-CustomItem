@@ -21,7 +21,6 @@ public class CraftListeners implements Listener {
         if (customItem != null) {
             // if Material of the result is same as the material of the recipe
             if (customItem.getType() == event.getInventory().getResult().getType()) {
-                Message.Get().broadcastMessageToConsole("You can't craft custom items");
                 event.getInventory().setResult(null);
             }
         }
