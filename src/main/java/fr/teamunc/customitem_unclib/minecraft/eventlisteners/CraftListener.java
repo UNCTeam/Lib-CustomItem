@@ -9,7 +9,7 @@ import org.bukkit.inventory.ItemStack;
 
 import java.util.Arrays;
 
-public class CraftListeners implements Listener {
+public class CraftListener implements Listener {
 
     @EventHandler
     public void onCraft(PrepareItemCraftEvent event) {

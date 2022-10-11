@@ -2,7 +2,8 @@ package fr.teamunc.customitem_unclib;
 
 import fr.teamunc.customitem_unclib.controllers.UNCCustomItemController;
 import fr.teamunc.customitem_unclib.minecraft.commandsExecutor.CustomItemCommands;
-import fr.teamunc.customitem_unclib.minecraft.eventlisteners.CraftListeners;
+import fr.teamunc.customitem_unclib.minecraft.eventlisteners.CraftListener;
+import fr.teamunc.customitem_unclib.minecraft.eventlisteners.DurabilityListener;
 import lombok.Getter;
 import org.bukkit.command.PluginCommand;
 import org.bukkit.plugin.java.JavaPlugin;
@@ -38,6 +39,7 @@ public class CustomItemLib {
     }
 
     public static void initGameListeners(CustomItem_UNCLib customItem_uncLib) {
-        customItem_uncLib.getServer().getPluginManager().registerEvents(new CraftListeners(), customItem_uncLib);
+        customItem_uncLib.getServer().getPluginManager().registerEvents(new CraftListener(), customItem_uncLib);
+        customItem_uncLib.getServer().getPluginManager().registerEvents(new DurabilityListener(), customItem_uncLib);
     }
 }
