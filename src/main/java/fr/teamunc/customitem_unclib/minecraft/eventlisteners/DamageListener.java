@@ -1,5 +1,6 @@
 package fr.teamunc.customitem_unclib.minecraft.eventlisteners;
 
+import fr.teamunc.base_unclib.utils.helpers.Message;
 import fr.teamunc.customitem_unclib.CustomItemLib;
 import fr.teamunc.customitem_unclib.models.CustomNamespaceKey;
 import org.bukkit.NamespacedKey;
@@ -9,14 +10,14 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.enchantment.EnchantItemEvent;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
+import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.event.inventory.PrepareAnvilEvent;
+import org.bukkit.event.inventory.PrepareItemCraftEvent;
+import org.bukkit.inventory.GrindstoneInventory;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 public class DamageListener implements Listener {
 
@@ -70,12 +71,31 @@ public class DamageListener implements Listener {
         }
         ItemStack result = event.getResult();
         if (result != null) {
-            List<String> newAttackDamage = new ArrayList<>();
-            newAttackDamage.add("10");
-            HashMap<CustomNamespaceKey, List<String>> data = new HashMap<>();
-            data.put(CustomNamespaceKey.CUSTOM_ATTACK_DAMAGE, newAttackDamage);
+            //TODO
+            int levelResult = result.getEnchantmentLevel(Enchantment.DAMAGE_ALL);
+            int levelDifference = levelResult - item.getEnchantmentLevel(Enchantment.DAMAGE_ALL);
 
-            CustomItemLib.getUNCCustomItemController().updateLores(result, data);
+            if (levelDifference == 0) return;
+
+            double newDamage = ((double) CustomNamespaceKey.CUSTOM_DISPLAYED_ATTACK_DAMAGE.getCustomData(item)) + 0.5 * Math.max(0, levelResult - 1) + 1.0;
+            ItemMeta meta = result.getItemMeta();
+            CustomNamespaceKey.CUSTOM_DISPLAYED_ATTACK_DAMAGE.setCustomData(meta, newDamage);
+            result.setItemMeta(meta);
+            CustomItemLib.getUNCCustomItemController().updateLores(result, new HashMap<>());
+        }
+    }
+
+    @EventHandler
+    public void onGrindstoneItem(InventoryClickEvent event) {
+        if ((event.getInventory() instanceof GrindstoneInventory)){
+            GrindstoneInventory inventory = (GrindstoneInventory) event.getInventory();
+            ItemStack item = inventory.getItem(2);
+            if (item == null || item.getItemMeta() == null || !CustomNamespaceKey.CUSTOM_TYPE.hasCustomData(item) || !CustomNamespaceKey.CUSTOM_DISPLAYED_ATTACK_DAMAGE.hasCustomData(item)) return;
+
+            ItemMeta meta = item.getItemMeta();
+            CustomNamespaceKey.CUSTOM_DISPLAYED_ATTACK_DAMAGE.setCustomData(meta, CustomNamespaceKey.CUSTOM_ATTACK_DAMAGE.getCustomData(item));
+            item.setItemMeta(meta);
+            CustomItemLib.getUNCCustomItemController().updateLores(item, new HashMap<>());
         }
     }
 }
