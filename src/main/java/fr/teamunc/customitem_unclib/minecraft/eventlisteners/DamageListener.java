@@ -47,9 +47,7 @@ public class DamageListener implements Listener {
                 double extraDamage = 0.5 * Math.max(0, integer - 1) + 1.0;
                 double baseDamage = CustomNamespaceKey.CUSTOM_DISPLAYED_ATTACK_DAMAGE.getCustomData(item);
 
-                ItemMeta meta = item.getItemMeta();
-                CustomNamespaceKey.CUSTOM_DISPLAYED_ATTACK_DAMAGE.setCustomData(meta, (baseDamage + extraDamage));
-                item.setItemMeta(meta);
+                item.setItemMeta(CustomNamespaceKey.CUSTOM_DISPLAYED_ATTACK_DAMAGE.setCustomData(item.getItemMeta(), (baseDamage + extraDamage)));
 
                 List<String> newAttackDamage = new ArrayList<>();
                 newAttackDamage.add("" + (baseDamage + extraDamage));
@@ -71,16 +69,16 @@ public class DamageListener implements Listener {
         }
         ItemStack result = event.getResult();
         if (result != null) {
-            //TODO
+
             int levelResult = result.getEnchantmentLevel(Enchantment.DAMAGE_ALL);
             int levelDifference = levelResult - item.getEnchantmentLevel(Enchantment.DAMAGE_ALL);
 
             if (levelDifference == 0) return;
 
             double newDamage = ((double) CustomNamespaceKey.CUSTOM_DISPLAYED_ATTACK_DAMAGE.getCustomData(item)) + 0.5 * Math.max(0, levelResult - 1) + 1.0;
-            ItemMeta meta = result.getItemMeta();
-            CustomNamespaceKey.CUSTOM_DISPLAYED_ATTACK_DAMAGE.setCustomData(meta, newDamage);
-            result.setItemMeta(meta);
+
+            result.setItemMeta(CustomNamespaceKey.CUSTOM_DISPLAYED_ATTACK_DAMAGE.setCustomData(result.getItemMeta(), newDamage));
+
             CustomItemLib.getUNCCustomItemController().updateLores(result, new HashMap<>());
         }
     }
@@ -92,9 +90,7 @@ public class DamageListener implements Listener {
             ItemStack item = inventory.getItem(2);
             if (item == null || item.getItemMeta() == null || !CustomNamespaceKey.CUSTOM_TYPE.hasCustomData(item) || !CustomNamespaceKey.CUSTOM_DISPLAYED_ATTACK_DAMAGE.hasCustomData(item)) return;
 
-            ItemMeta meta = item.getItemMeta();
-            CustomNamespaceKey.CUSTOM_DISPLAYED_ATTACK_DAMAGE.setCustomData(meta, CustomNamespaceKey.CUSTOM_ATTACK_DAMAGE.getCustomData(item));
-            item.setItemMeta(meta);
+            item.setItemMeta(CustomNamespaceKey.CUSTOM_DISPLAYED_ATTACK_DAMAGE.setCustomData(item.getItemMeta(), CustomNamespaceKey.CUSTOM_ATTACK_DAMAGE.getCustomData(item)));
             CustomItemLib.getUNCCustomItemController().updateLores(item, new HashMap<>());
         }
     }

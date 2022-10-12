@@ -92,9 +92,11 @@ public enum CustomNamespaceKey {
         return data;
     }
 
-    public void setCustomData(ItemMeta meta, Object durabilities) {
+    public ItemMeta setCustomData(ItemMeta meta, Object durabilities) {
         if (meta != null) {
             meta.getPersistentDataContainer().set(this.getNamespaceKey(), type, durabilities);
         }
+
+        return meta;
     }
 }
