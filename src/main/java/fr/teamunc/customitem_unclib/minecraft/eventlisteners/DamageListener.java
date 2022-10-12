@@ -1,6 +1,5 @@
 package fr.teamunc.customitem_unclib.minecraft.eventlisteners;
 
-import fr.teamunc.base_unclib.utils.helpers.Message;
 import fr.teamunc.customitem_unclib.CustomItemLib;
 import fr.teamunc.customitem_unclib.models.CustomNamespaceKey;
 import org.bukkit.NamespacedKey;
@@ -12,6 +11,7 @@ import org.bukkit.event.enchantment.EnchantItemEvent;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.event.inventory.PrepareAnvilEvent;
 import org.bukkit.inventory.ItemStack;
+import org.bukkit.inventory.meta.ItemMeta;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -46,7 +46,9 @@ public class DamageListener implements Listener {
                 double extraDamage = 0.5 * Math.max(0, integer - 1) + 1.0;
                 double baseDamage = CustomNamespaceKey.CUSTOM_DISPLAYED_ATTACK_DAMAGE.getCustomData(item);
 
-                CustomNamespaceKey.CUSTOM_DISPLAYED_ATTACK_DAMAGE.setCustomData(item.getItemMeta(), (baseDamage + extraDamage));
+                ItemMeta meta = item.getItemMeta();
+                CustomNamespaceKey.CUSTOM_DISPLAYED_ATTACK_DAMAGE.setCustomData(meta, (baseDamage + extraDamage));
+                item.setItemMeta(meta);
 
                 List<String> newAttackDamage = new ArrayList<>();
                 newAttackDamage.add("" + (baseDamage + extraDamage));

@@ -12,10 +12,10 @@ import java.util.List;
 
 @Getter
 public class UNCCustomSwordType extends UNCCustomType {
-    private Integer attackDamage;
+    private Double attackDamage;
 
     @Builder
-    public UNCCustomSwordType(String name, ArrayList<String> lore, int modelData, int maxDurability, boolean unbreakable, String customKey, int attackDamage, int attackSpeed) {
+    public UNCCustomSwordType(String name, ArrayList<String> lore, int modelData, int maxDurability, boolean unbreakable, String customKey, double attackDamage, int attackSpeed) {
         super(name, lore, modelData, maxDurability, unbreakable, customKey, Material.NETHERITE_SWORD);
         this.attackDamage = attackDamage;
     }
@@ -30,8 +30,8 @@ public class UNCCustomSwordType extends UNCCustomType {
 
         ItemMeta meta = createCustomItemMeta();
 
-        CustomNamespaceKey.CUSTOM_ATTACK_DAMAGE.setCustomData(meta,(double) getAttackDamage());
-        CustomNamespaceKey.CUSTOM_DISPLAYED_ATTACK_DAMAGE.setCustomData(meta, (double) getAttackDamage());
+        CustomNamespaceKey.CUSTOM_ATTACK_DAMAGE.setCustomData(meta, getAttackDamage());
+        CustomNamespaceKey.CUSTOM_DISPLAYED_ATTACK_DAMAGE.setCustomData(meta, getAttackDamage());
 
         List<String> attackdamage = new ArrayList<>();
         attackdamage.add("" + getAttackDamage());

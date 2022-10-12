@@ -1,6 +1,5 @@
 package fr.teamunc.customitem_unclib;
 
-import fr.teamunc.base_unclib.utils.helpers.Message;
 import fr.teamunc.customitem_unclib.controllers.UNCCustomItemController;
 import fr.teamunc.customitem_unclib.minecraft.commandsExecutor.CustomItemCommands;
 import fr.teamunc.customitem_unclib.minecraft.eventlisteners.CraftListener;
@@ -9,9 +8,6 @@ import fr.teamunc.customitem_unclib.minecraft.eventlisteners.DurabilityListener;
 import lombok.Getter;
 import org.bukkit.command.PluginCommand;
 import org.bukkit.plugin.java.JavaPlugin;
-
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Objects;
 
 public class CustomItemLib {
