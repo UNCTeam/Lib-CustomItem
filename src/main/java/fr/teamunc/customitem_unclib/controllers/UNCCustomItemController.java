@@ -1,6 +1,5 @@
 package fr.teamunc.customitem_unclib.controllers;
 
-import fr.teamunc.customitem_unclib.CustomItemLib;
 import fr.teamunc.customitem_unclib.models.CustomNamespaceKey;
 import fr.teamunc.customitem_unclib.models.UNCCustomType;
 
@@ -11,7 +10,6 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.Recipe;
 import org.bukkit.inventory.meta.Damageable;
 import org.bukkit.inventory.meta.ItemMeta;
-import org.bukkit.persistence.PersistentDataType;
 
 import java.util.HashMap;
 import java.util.List;
@@ -55,26 +53,32 @@ public class UNCCustomItemController {
 
     public void changeDurability(ItemStack item, Player player, int amount) {
         ItemMeta meta = item.getItemMeta();
-        Integer durability = CustomNamespaceKey.CUSTOM_DURABILITY.getCustomData(item);
-        if (durability - amount >= 0) {
-            // changing durability
-            durability -= amount;
-            meta.getPersistentDataContainer().set(CustomNamespaceKey.CUSTOM_DURABILITY.getNamespaceKey(), PersistentDataType.INTEGER, durability);
+        int[] durabilities = CustomNamespaceKey.CUSTOM_DURABILITY.getCustomData(item);
 
-            // actualizing durability lore line
-            String customType = CustomNamespaceKey.CUSTOM_TYPE.getCustomData(item);
-            int maxDurability = CustomItemLib.getUNCCustomItemController().getCustomItemType(customType).getMaxDurability();
-            List<String> lore = meta.getLore();
-            lore.set(lore.size()-1, "§r§fDurability : §d§l" + durability + "§r§f/§d§l" + maxDurability);
-            meta.setLore(lore);
+        if (durabilities[0] - amount >= 0) {
+            // changing durability
+            durabilities[0] -= amount;
+            CustomNamespaceKey.CUSTOM_DURABILITY.setCustomData(meta, durabilities);
 
             // actualizing item damage amount
-            int displayDurability = ((maxDurability-durability)*item.getType().getMaxDurability())/maxDurability;
+            int displayDurability = ((durabilities[1]-durabilities[0])*item.getType().getMaxDurability())/durabilities[1];
             ((Damageable)meta).setDamage(displayDurability);
 
             item.setItemMeta(meta);
+
+            this.updateLores(item,new HashMap<>());
+
         } else {
             player.getInventory().remove(item);
         }
+    }
+
+    public void updateLores(ItemStack result, HashMap<CustomNamespaceKey, List<String>> newDataLore) {
+        ItemMeta meta = result.getItemMeta();
+        String customType = CustomNamespaceKey.CUSTOM_TYPE.getCustomData(result);
+
+        this.customItemsMap.get(customType).updateLores(meta, newDataLore);
+
+        result.setItemMeta(meta);
     }
 }
