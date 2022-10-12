@@ -1,11 +1,9 @@
 package fr.teamunc.customitem_unclib.models;
 
-import fr.teamunc.base_unclib.utils.helpers.Message;
 import fr.teamunc.customitem_unclib.CustomItemLib;
 import lombok.Getter;
 import lombok.NonNull;
 import org.bukkit.NamespacedKey;
-import org.bukkit.entity.Item;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.persistence.PersistentDataType;
@@ -16,8 +14,9 @@ public enum CustomNamespaceKey {
     CUSTOM_TYPE("custom_type", PersistentDataType.STRING, "", false),
     CUSTOM_DURABILITY("custom_durability", PersistentDataType.INTEGER_ARRAY, "§r§fDurability: %s / %s", true),
     CUSTOM_UNBREAKABLE("custom_unbreakable", PersistentDataType.BYTE, "§r§7Unbreakable", false),
-    CUSTOM_ATTACK_DAMAGE("custom_attackdamage", PersistentDataType.INTEGER, "§r§2 %s Attack Damage", true),
-    CUSTOM_ATTACK_SPEED("custom_attackspeed", PersistentDataType.INTEGER, "§r§2 %s Attack Speed", true);
+    CUSTOM_ATTACK_DAMAGE("custom_attackdamage", PersistentDataType.DOUBLE, "", false),
+    CUSTOM_DISPLAYED_ATTACK_DAMAGE("custom_displayed_attackdamage", PersistentDataType.DOUBLE, "§r§2 %s Attack Damage", true),
+    CUSTOM_ATTACK_SPEED("custom_attackspeed", PersistentDataType.DOUBLE, "§r§2 %s Attack Speed", false);
 
     private final String key;
     @Getter
@@ -26,9 +25,9 @@ public enum CustomNamespaceKey {
     private final String loreBaseRow;
     private final boolean writeInLore;
 
-    CustomNamespaceKey(String key, PersistentDataType persistentDataType, String loreBaseRow, boolean writeInLore) {
+    CustomNamespaceKey(String key, PersistentDataType type, String loreBaseRow, boolean writeInLore) {
         this.key = key;
-        this.type = persistentDataType;
+        this.type = type;
         this.loreBaseRow = loreBaseRow;
         this.writeInLore = writeInLore;
     }
@@ -42,11 +41,11 @@ public enum CustomNamespaceKey {
     }
 
     public boolean hasCustomData(ItemStack item) {
-        return item.hasItemMeta() && item.getItemMeta().hasCustomModelData() && item.getItemMeta().getPersistentDataContainer().has(this.getNamespaceKey(), type);
+        return item.hasItemMeta() && item.getItemMeta().getPersistentDataContainer().has(this.getNamespaceKey(), type);
     }
 
     public boolean hasCustomData(ItemMeta meta) {
-        return meta != null && meta.hasCustomModelData() && meta.getPersistentDataContainer().has(this.getNamespaceKey(), type);
+        return meta != null && meta.getPersistentDataContainer().has(this.getNamespaceKey(), type);
     }
 
     @NonNull
@@ -91,5 +90,11 @@ public enum CustomNamespaceKey {
             }
         }
         return data;
+    }
+
+    public void setCustomData(ItemMeta meta, Object durabilities) {
+        if (meta != null) {
+            meta.getPersistentDataContainer().set(this.getNamespaceKey(), type, durabilities);
+        }
     }
 }

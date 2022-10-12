@@ -6,7 +6,6 @@ import org.bukkit.Material;
 import org.bukkit.inventory.ItemFlag;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
-import org.bukkit.persistence.PersistentDataType;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -35,9 +34,9 @@ public abstract class UNCCustomType {
         res.setDisplayName("§r" + getName());
         res.setCustomModelData(getModelData());
 
-        res.getPersistentDataContainer().set(CustomNamespaceKey.CUSTOM_UNBREAKABLE.getNamespaceKey(), PersistentDataType.BYTE, (byte) (isUnbreakable() ? 1 : 0));
-        res.getPersistentDataContainer().set(CustomNamespaceKey.CUSTOM_DURABILITY.getNamespaceKey(), PersistentDataType.INTEGER_ARRAY, new int[]{getMaxDurability(), getMaxDurability()});
-        res.getPersistentDataContainer().set(CustomNamespaceKey.CUSTOM_TYPE.getNamespaceKey(), PersistentDataType.STRING, getCustomKey());
+        CustomNamespaceKey.CUSTOM_UNBREAKABLE.setCustomData(res, (byte) (isUnbreakable() ? 1 : 0));
+        CustomNamespaceKey.CUSTOM_DURABILITY.setCustomData(res, new int[]{getMaxDurability(), getMaxDurability()});
+        CustomNamespaceKey.CUSTOM_TYPE.setCustomData(res, getCustomKey());
         /**
          * IMPORTANT : The lore must be set in the createCustomItem method
          */
@@ -47,9 +46,9 @@ public abstract class UNCCustomType {
 
     protected ArrayList<String> getBaseLores(HashMap<CustomNamespaceKey, List<String>> data) {
         ArrayList<String> res = new ArrayList<>(getLore());
-        lore.add("");
+        res.add("");
 
-        if (isUnbreakable()) lore.add("§r§7Unbreakable");
+        if (isUnbreakable()) res.add("§r§7Unbreakable");
 
         for (CustomNamespaceKey customNamespaceKey : CustomNamespaceKey.values()) {
             List<String> o = data.get(customNamespaceKey);

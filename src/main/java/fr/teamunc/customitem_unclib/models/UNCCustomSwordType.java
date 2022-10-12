@@ -5,12 +5,10 @@ import lombok.Getter;
 import org.bukkit.Material;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
-import org.bukkit.persistence.PersistentDataType;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 @Getter
 public class UNCCustomSwordType extends UNCCustomType {
@@ -31,13 +29,15 @@ public class UNCCustomSwordType extends UNCCustomType {
         ItemStack res = new ItemStack(getBukkitMaterial(), amount);
 
         ItemMeta meta = createCustomItemMeta();
-        meta.getPersistentDataContainer().set(CustomNamespaceKey.CUSTOM_ATTACK_DAMAGE.getNamespaceKey(), PersistentDataType.INTEGER, getAttackDamage());
+
+        CustomNamespaceKey.CUSTOM_ATTACK_DAMAGE.setCustomData(meta,(double) getAttackDamage());
+        CustomNamespaceKey.CUSTOM_DISPLAYED_ATTACK_DAMAGE.setCustomData(meta, (double) getAttackDamage());
 
         List<String> attackdamage = new ArrayList<>();
         attackdamage.add("" + getAttackDamage());
 
         HashMap<CustomNamespaceKey, List<String>> data = new HashMap<>();
-        data.put(CustomNamespaceKey.CUSTOM_ATTACK_DAMAGE, attackdamage);
+        data.put(CustomNamespaceKey.CUSTOM_DISPLAYED_ATTACK_DAMAGE, attackdamage);
 
         updateLores(meta, data);
 
@@ -53,7 +53,6 @@ public class UNCCustomSwordType extends UNCCustomType {
         CustomNamespaceKey.refillEmptyDataLore(data, meta);
 
         ArrayList<String> newLore = getBaseLores(data);
-
         meta.setLore(newLore);
     }
 }
