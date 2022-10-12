@@ -1,11 +1,15 @@
 package fr.teamunc.customitem_unclib.models.customArmors;
 
 
+import fr.teamunc.customitem_unclib.models.CustomNamespaceKey;
 import lombok.Getter;
 import org.bukkit.Material;
 import org.bukkit.inventory.ItemStack;
+import org.bukkit.inventory.meta.ItemMeta;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
 
 @Getter
 public class UNCCustomBootsType extends UNCCustomArmorType {
@@ -17,5 +21,10 @@ public class UNCCustomBootsType extends UNCCustomArmorType {
     @Override
     public ItemStack createCustomItem(int amount) {
         return null;
+    }
+
+    @Override
+    public void updateLores(ItemMeta meta, HashMap<CustomNamespaceKey, List<String>> data) {
+
     }
 }

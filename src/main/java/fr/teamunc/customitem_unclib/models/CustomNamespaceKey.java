@@ -1,23 +1,36 @@
 package fr.teamunc.customitem_unclib.models;
 
+import fr.teamunc.base_unclib.utils.helpers.Message;
 import fr.teamunc.customitem_unclib.CustomItemLib;
 import lombok.Getter;
 import lombok.NonNull;
 import org.bukkit.NamespacedKey;
+import org.bukkit.entity.Item;
 import org.bukkit.inventory.ItemStack;
+import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.persistence.PersistentDataType;
 
+import java.util.*;
+
 public enum CustomNamespaceKey {
-    CUSTOM_TYPE("custom_type", PersistentDataType.STRING),
-    CUSTOM_DURABILITY("custom_durability", PersistentDataType.INTEGER),
-    CUSTOM_UNBREAKABLE("custom_unbreakable", PersistentDataType.BYTE);
+    CUSTOM_TYPE("custom_type", PersistentDataType.STRING, "", false),
+    CUSTOM_DURABILITY("custom_durability", PersistentDataType.INTEGER_ARRAY, "§r§fDurability: %s / %s", true),
+    CUSTOM_UNBREAKABLE("custom_unbreakable", PersistentDataType.BYTE, "§r§7Unbreakable", false),
+    CUSTOM_ATTACK_DAMAGE("custom_attackdamage", PersistentDataType.INTEGER, "§r§2 %s Attack Damage", true),
+    CUSTOM_ATTACK_SPEED("custom_attackspeed", PersistentDataType.INTEGER, "§r§2 %s Attack Speed", true);
 
     private final String key;
     @Getter
     private final PersistentDataType type;
-    CustomNamespaceKey(String key, PersistentDataType persistentDataType) {
+    @Getter
+    private final String loreBaseRow;
+    private final boolean writeInLore;
+
+    CustomNamespaceKey(String key, PersistentDataType persistentDataType, String loreBaseRow, boolean writeInLore) {
         this.key = key;
-        type = persistentDataType;
+        this.type = persistentDataType;
+        this.loreBaseRow = loreBaseRow;
+        this.writeInLore = writeInLore;
     }
 
     public NamespacedKey getNamespaceKey() {
@@ -32,12 +45,51 @@ public enum CustomNamespaceKey {
         return item.hasItemMeta() && item.getItemMeta().hasCustomModelData() && item.getItemMeta().getPersistentDataContainer().has(this.getNamespaceKey(), type);
     }
 
+    public boolean hasCustomData(ItemMeta meta) {
+        return meta != null && meta.hasCustomModelData() && meta.getPersistentDataContainer().has(this.getNamespaceKey(), type);
+    }
+
     @NonNull
     public <T> T getCustomData(ItemStack item) {
         if (hasCustomData(item)) {
-            return (T) item.getItemMeta().getPersistentDataContainer().get(this.getNamespaceKey(), type);
+            return (T) Objects.requireNonNull(item.getItemMeta().getPersistentDataContainer().get(this.getNamespaceKey(), type));
         } else {
             throw new IllegalStateException("Item has no custom data");
         }
+    }
+
+    @NonNull
+    public <T> T getCustomData(ItemMeta meta) {
+        if (hasCustomData(meta)) {
+            return (T) meta.getPersistentDataContainer().get(this.getNamespaceKey(), type);
+        } else {
+            throw new IllegalStateException("Meta has no custom data");
+        }
+    }
+
+    public String getLoreRow(List<String> value) {
+        return String.format(loreBaseRow, value.toArray());
+    }
+
+    public static HashMap<CustomNamespaceKey, List<String>> refillEmptyDataLore(HashMap<CustomNamespaceKey, List<String>> data, ItemMeta meta) {
+        for (CustomNamespaceKey key : CustomNamespaceKey.values()) {
+            if (!data.containsKey(key) && key.hasCustomData(meta)) {
+
+                if (!key.writeInLore) {
+                    continue;
+                }
+
+                ArrayList<String> values = new ArrayList<>();
+                if (key == CUSTOM_DURABILITY) {
+                    int[] durability = key.getCustomData(meta);
+                    values.add(String.valueOf(durability[0]));
+                    values.add(String.valueOf(durability[1]));
+                }
+                else values.add(key.getCustomData(meta).toString());
+
+                data.put(key, values);
+            }
+        }
+        return data;
     }
 }

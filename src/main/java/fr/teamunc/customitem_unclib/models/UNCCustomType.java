@@ -1,15 +1,16 @@
 package fr.teamunc.customitem_unclib.models;
 
-import fr.teamunc.customitem_unclib.CustomItemLib;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import org.bukkit.Material;
-import org.bukkit.NamespacedKey;
+import org.bukkit.inventory.ItemFlag;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.persistence.PersistentDataType;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
 
 @Getter
 @AllArgsConstructor
@@ -29,26 +30,37 @@ public abstract class UNCCustomType {
 
     protected ItemMeta createCustomItemMeta() {
         ItemMeta res = new ItemStack(getBukkitMaterial()).getItemMeta();
-        ArrayList<String> lore = new ArrayList<>(getLore());
-
+        res.addItemFlags(ItemFlag.HIDE_ATTRIBUTES);
 
         res.setDisplayName("§r" + getName());
         res.setCustomModelData(getModelData());
 
-        // Durability
-        res.getPersistentDataContainer().set(CustomNamespaceKey.CUSTOM_DURABILITY.getNamespaceKey(), PersistentDataType.INTEGER, getMaxDurability());
-        lore.add("");
-        lore.add("§r§fDurability : §d§l" + getMaxDurability() + "§r§f/§d§l" + getMaxDurability());
-
-        // Unbreakable
         res.getPersistentDataContainer().set(CustomNamespaceKey.CUSTOM_UNBREAKABLE.getNamespaceKey(), PersistentDataType.BYTE, (byte) (isUnbreakable() ? 1 : 0));
-
-        // CustomKey
+        res.getPersistentDataContainer().set(CustomNamespaceKey.CUSTOM_DURABILITY.getNamespaceKey(), PersistentDataType.INTEGER_ARRAY, new int[]{getMaxDurability(), getMaxDurability()});
         res.getPersistentDataContainer().set(CustomNamespaceKey.CUSTOM_TYPE.getNamespaceKey(), PersistentDataType.STRING, getCustomKey());
-
-        // Final lore
-        res.setLore(lore);
+        /**
+         * IMPORTANT : The lore must be set in the createCustomItem method
+         */
 
         return res;
     }
+
+    protected ArrayList<String> getBaseLores(HashMap<CustomNamespaceKey, List<String>> data) {
+        ArrayList<String> res = new ArrayList<>(getLore());
+        lore.add("");
+
+        if (isUnbreakable()) lore.add("§r§7Unbreakable");
+
+        for (CustomNamespaceKey customNamespaceKey : CustomNamespaceKey.values()) {
+            List<String> o = data.get(customNamespaceKey);
+            if (o != null) {
+                String row = customNamespaceKey.getLoreRow(o);
+                res.add(row);
+            }
+        }
+
+        return res;
+    }
+
+    public abstract void updateLores(ItemMeta meta, HashMap<CustomNamespaceKey, List<String>> data);
 }
