@@ -22,11 +22,13 @@ public class UNCCustomItemController {
         customItemsMap = new HashMap<>();
     }
 
-    public void registerCustomItem(UNCCustomType customItem) {
-        if (customItemsMap.containsKey(customItem.getCustomKey())) {
-            throw new IllegalArgumentException("Custom item with key " + customItem.getCustomKey() + " already exists");
-        } else {
-            customItemsMap.put(customItem.getCustomKey(), customItem);
+    public void registerCustomItem(UNCCustomType... customItems) {
+        for (UNCCustomType customItem : customItems) {
+            if (customItemsMap.containsKey(customItem.getCustomKey())) {
+                throw new IllegalArgumentException("Custom item with key " + customItem.getCustomKey() + " already exists");
+            } else {
+                customItemsMap.put(customItem.getCustomKey(), customItem);
+            }
         }
     }
 
