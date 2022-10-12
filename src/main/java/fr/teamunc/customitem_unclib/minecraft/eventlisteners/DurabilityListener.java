@@ -16,7 +16,6 @@ public class DurabilityListener implements Listener {
         ItemStack item = event.getPlayer().getInventory().getItemInMainHand();
         Player player = event.getPlayer();
 
-        Message.Get().broadcastMessageToConsole("" + CustomNamespaceKey.CUSTOM_TYPE.hasCustomData(item));
         if (item.getItemMeta() == null || !CustomNamespaceKey.CUSTOM_TYPE.hasCustomData(item)) return;
 
         if (CustomNamespaceKey.CUSTOM_UNBREAKABLE.hasCustomData(item) && CustomNamespaceKey.CUSTOM_UNBREAKABLE.getCustomData(item).equals((byte) 1)) {

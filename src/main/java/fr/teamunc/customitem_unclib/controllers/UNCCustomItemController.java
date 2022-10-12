@@ -57,22 +57,20 @@ public class UNCCustomItemController {
     public void changeDurability(ItemStack item, Player player, int amount) {
         ItemMeta meta = item.getItemMeta();
         int[] durabilities = CustomNamespaceKey.CUSTOM_DURABILITY.getCustomData(item);
-        Message.Get().broadcastMessageToConsole("Durability: " + durabilities[0] + " / " + durabilities[1]);
+
         if (durabilities[0] - amount >= 0) {
             // changing durability
             durabilities[0] -= amount;
             meta.getPersistentDataContainer().set(CustomNamespaceKey.CUSTOM_DURABILITY.getNamespaceKey(), PersistentDataType.INTEGER_ARRAY, durabilities);
-
-            // actualizing durability lore line
-            List<String> lore = meta.getLore();
-            lore.set(lore.size()-1, "§r§fDurability: " + durabilities[0] + " / " + durabilities[1]);
-            meta.setLore(lore);
 
             // actualizing item damage amount
             int displayDurability = ((durabilities[1]-durabilities[0])*item.getType().getMaxDurability())/durabilities[1];
             ((Damageable)meta).setDamage(displayDurability);
 
             item.setItemMeta(meta);
+
+            this.updateLores(item,new HashMap<>());
+
         } else {
             player.getInventory().remove(item);
         }
@@ -83,5 +81,7 @@ public class UNCCustomItemController {
         String customType = CustomNamespaceKey.CUSTOM_TYPE.getCustomData(result);
 
         this.customItemsMap.get(customType).updateLores(meta, newDataLore);
+
+        result.setItemMeta(meta);
     }
 }
