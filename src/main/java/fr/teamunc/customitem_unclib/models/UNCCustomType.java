@@ -2,6 +2,7 @@ package fr.teamunc.customitem_unclib.models;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import org.bukkit.Material;
 import org.bukkit.inventory.ItemFlag;
 import org.bukkit.inventory.ItemStack;
@@ -24,6 +25,8 @@ public abstract class UNCCustomType {
      */
     private String customKey;
     private Material bukkitMaterial;
+
+    private UNCAction action;
 
     public abstract ItemStack createCustomItem(int amount);
 
@@ -61,5 +64,11 @@ public abstract class UNCCustomType {
         return res;
     }
 
-    public abstract void updateLores(ItemMeta meta, HashMap<CustomNamespaceKey, List<String>> data);
+    public void updateLores(ItemMeta meta, HashMap<CustomNamespaceKey, List<String>> data) {
+        // refill with default lores
+        CustomNamespaceKey.refillEmptyDataLore(data, meta);
+
+        ArrayList<String> newLore = getBaseLores(data);
+        meta.setLore(newLore);
+    }
 }

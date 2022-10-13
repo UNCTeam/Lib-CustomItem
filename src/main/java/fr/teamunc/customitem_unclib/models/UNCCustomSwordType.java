@@ -15,8 +15,8 @@ public class UNCCustomSwordType extends UNCCustomType {
     private Double attackDamage;
 
     @Builder
-    public UNCCustomSwordType(String name, ArrayList<String> lore, int modelData, int maxDurability, boolean unbreakable, String customKey, double attackDamage, int attackSpeed) {
-        super(name, lore, modelData, maxDurability, unbreakable, customKey, Material.NETHERITE_SWORD);
+    public UNCCustomSwordType(String name, ArrayList<String> lore, int modelData, int maxDurability, boolean unbreakable, String customKey, double attackDamage, int attackSpeed, UNCAction action) {
+        super(name, lore, modelData, maxDurability, unbreakable, customKey, Material.NETHERITE_SWORD, action);
         this.attackDamage = attackDamage;
     }
 
@@ -44,15 +44,5 @@ public class UNCCustomSwordType extends UNCCustomType {
         res.setItemMeta(meta);
 
         return res;
-    }
-
-    @Override
-    public void updateLores(ItemMeta meta, HashMap<CustomNamespaceKey, List<String>> data) {
-
-        // refill with default lores
-        CustomNamespaceKey.refillEmptyDataLore(data, meta);
-
-        ArrayList<String> newLore = getBaseLores(data);
-        meta.setLore(newLore);
     }
 }

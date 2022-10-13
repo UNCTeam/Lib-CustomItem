@@ -1,5 +1,6 @@
 package fr.teamunc.customitem_unclib.models.customArmors;
 
+import fr.teamunc.customitem_unclib.models.UNCAction;
 import fr.teamunc.customitem_unclib.models.UNCCustomType;
 import lombok.Getter;
 import org.bukkit.Material;
@@ -10,7 +11,7 @@ import java.util.ArrayList;
 @Getter
 public abstract class UNCCustomArmorType extends UNCCustomType {
 
-    public UNCCustomArmorType(String name, ArrayList<String> lore, int modelData, int maxDurability, boolean unbreakable, String customKey, Material bukkitMaterial) {
-        super(name, lore, modelData, maxDurability, unbreakable, customKey, bukkitMaterial);
+    public UNCCustomArmorType(String name, ArrayList<String> lore, int modelData, int maxDurability, boolean unbreakable, String customKey, Material bukkitMaterial, UNCAction action) {
+        super(name, lore, modelData, maxDurability, unbreakable, customKey, bukkitMaterial, action);
     }
 }

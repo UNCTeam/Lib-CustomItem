@@ -14,12 +14,12 @@ import java.util.List;
 public class UNCCustomPickaxeType extends UNCCustomType {
 
     @Builder
-    public UNCCustomPickaxeType(String name, ArrayList<String> lore, int modelData, int maxDurability, boolean unbreakable, String customKey, Material bukkitMaterial) {
-        super(name, lore, modelData, maxDurability, unbreakable, customKey, bukkitMaterial);
+    public UNCCustomPickaxeType(String name, ArrayList<String> lore, int modelData, int maxDurability, boolean unbreakable, String customKey, Material bukkitMaterial, UNCAction action) {
+        super(name, lore, modelData, maxDurability, unbreakable, customKey, bukkitMaterial, action);
     }
 
-    public static UNCCustomPickaxeType.UNCCustomPickaxeTypeBuilder builder(String customKey, Material bukkitMaterial) {
-        return new UNCCustomPickaxeType.UNCCustomPickaxeTypeBuilder().customKey(customKey).bukkitMaterial(bukkitMaterial);
+    public static UNCCustomPickaxeTypeBuilder builder(String customKey, Material bukkitMaterial) {
+        return new UNCCustomPickaxeTypeBuilder().customKey(customKey).bukkitMaterial(bukkitMaterial);
     }
 
     @Override
@@ -35,14 +35,5 @@ public class UNCCustomPickaxeType extends UNCCustomType {
         res.setItemMeta(meta);
 
         return res;
-    }
-
-    @Override
-    public void updateLores(ItemMeta meta, HashMap<CustomNamespaceKey, List<String>> data) {
-        // refill with default lores
-        CustomNamespaceKey.refillEmptyDataLore(data, meta);
-
-        ArrayList<String> newLore = getBaseLores(data);
-        meta.setLore(newLore);
     }
 }

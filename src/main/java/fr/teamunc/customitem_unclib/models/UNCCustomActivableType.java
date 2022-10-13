@@ -1,5 +1,7 @@
 package fr.teamunc.customitem_unclib.models;
 
+import fr.teamunc.customitem_unclib.models.customArmors.UNCCustomLeggingsType;
+import lombok.Builder;
 import lombok.Getter;
 import org.bukkit.Material;
 import org.bukkit.inventory.ItemStack;
@@ -12,8 +14,13 @@ import java.util.List;
 @Getter
 public class UNCCustomActivableType extends UNCCustomType {
 
-    public UNCCustomActivableType(String name, ArrayList<String> lore, int modelData, int maxDurability, boolean unbreakable, String customKey, Material bukkitMaterial) {
-        super(name, lore, modelData, maxDurability, unbreakable, customKey, bukkitMaterial);
+    @Builder
+    public UNCCustomActivableType(String name, ArrayList<String> lore, int modelData, int maxDurability, boolean unbreakable, String customKey, Material bukkitMaterial, UNCAction action) {
+        super(name, lore, modelData, maxDurability, unbreakable, customKey, bukkitMaterial, action);
+    }
+
+    public static UNCCustomActivableTypeBuilder builder(String customKey) {
+        return new UNCCustomActivableTypeBuilder().customKey(customKey);
     }
 
     @Override

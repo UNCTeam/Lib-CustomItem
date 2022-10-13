@@ -11,6 +11,7 @@ import org.bukkit.inventory.Recipe;
 import org.bukkit.inventory.meta.Damageable;
 import org.bukkit.inventory.meta.ItemMeta;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
@@ -35,6 +36,10 @@ public class UNCCustomItemController {
     public void registerCraft(Recipe recipe, NamespacedKey namespacedKey, boolean replace) {
         if (replace) Bukkit.getServer().removeRecipe(namespacedKey);
         Bukkit.getServer().addRecipe(recipe);
+    }
+
+    public List<String> getRegisteredCustomItemTypes() {
+        return new ArrayList<>(customItemsMap.keySet());
     }
 
     public ItemStack createCustomItem(String customKey, int amount) {

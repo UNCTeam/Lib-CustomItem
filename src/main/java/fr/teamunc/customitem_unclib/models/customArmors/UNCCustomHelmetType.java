@@ -1,6 +1,8 @@
 package fr.teamunc.customitem_unclib.models.customArmors;
 
 import fr.teamunc.customitem_unclib.models.CustomNamespaceKey;
+import fr.teamunc.customitem_unclib.models.UNCAction;
+import lombok.Builder;
 import lombok.Getter;
 import org.bukkit.Material;
 import org.bukkit.inventory.ItemStack;
@@ -13,8 +15,13 @@ import java.util.List;
 @Getter
 public class UNCCustomHelmetType extends UNCCustomArmorType {
 
-    public UNCCustomHelmetType(String name, ArrayList<String> lore, int modelData, int maxDurability, boolean unbreakable, String customKey, Material bukkitMaterial) {
-        super(name, lore, modelData, maxDurability, unbreakable, customKey, bukkitMaterial);
+    @Builder
+    public UNCCustomHelmetType(String name, ArrayList<String> lore, int modelData, int maxDurability, boolean unbreakable, String customKey, Material bukkitMaterial, UNCAction action) {
+        super(name, lore, modelData, maxDurability, unbreakable, customKey, bukkitMaterial, action);
+    }
+
+    public static UNCCustomHelmetTypeBuilder builder(String customKey) {
+        return new UNCCustomHelmetTypeBuilder().customKey(customKey);
     }
 
     @Override
@@ -22,8 +29,4 @@ public class UNCCustomHelmetType extends UNCCustomArmorType {
         return null;
     }
 
-    @Override
-    public void updateLores(ItemMeta meta, HashMap<CustomNamespaceKey, List<String>> data) {
-
-    }
 }
