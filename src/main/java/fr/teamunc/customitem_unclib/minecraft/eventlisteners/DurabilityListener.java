@@ -3,12 +3,9 @@ package fr.teamunc.customitem_unclib.minecraft.eventlisteners;
 import fr.teamunc.base_unclib.utils.helpers.Message;
 import fr.teamunc.customitem_unclib.CustomItemLib;
 import fr.teamunc.customitem_unclib.models.CustomNamespaceKey;
-import fr.teamunc.customitem_unclib.models.UNCCustomType;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
-import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
-import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.event.player.PlayerItemDamageEvent;
 import org.bukkit.inventory.ItemStack;
 
@@ -20,7 +17,7 @@ public class DurabilityListener implements Listener {
            return;
         }
 
-        ItemStack item = event.getPlayer().getInventory().getItemInMainHand();
+        ItemStack item = event.getItem();
         Player player = event.getPlayer();
 
         if (item.getItemMeta() == null || !CustomNamespaceKey.CUSTOM_TYPE.hasCustomData(item)) return;
@@ -34,4 +31,6 @@ public class DurabilityListener implements Listener {
 
         CustomItemLib.getUNCCustomItemController().changeDurability(item, player, event.getDamage());
     }
+
+
 }
