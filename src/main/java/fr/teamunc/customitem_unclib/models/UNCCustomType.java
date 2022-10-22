@@ -30,7 +30,7 @@ public abstract class UNCCustomType {
 
     public ItemStack createCustomItem(int amount) {
         ItemStack res = new ItemStack(getBukkitMaterial(), amount);
-        ItemMeta meta = createCustomItemMeta();
+        ItemMeta meta = createCustomItemMeta(true);
 
         HashMap<CustomNamespaceKey, List<String>> data = new HashMap<>();
         updateLores(meta, data);
@@ -40,7 +40,7 @@ public abstract class UNCCustomType {
         return res;
     }
 
-    protected ItemMeta createCustomItemMeta() {
+    protected ItemMeta createCustomItemMeta(boolean withDurability) {
         ItemMeta res = new ItemStack(getBukkitMaterial()).getItemMeta();
         res.addItemFlags(ItemFlag.HIDE_ATTRIBUTES);
 
@@ -48,7 +48,7 @@ public abstract class UNCCustomType {
         res.setCustomModelData(getModelData());
 
         CustomNamespaceKey.CUSTOM_UNBREAKABLE.setCustomData(res, (byte) (isUnbreakable() ? 1 : 0));
-        CustomNamespaceKey.CUSTOM_DURABILITY.setCustomData(res, new int[]{getMaxDurability(), getMaxDurability()});
+        if (withDurability) CustomNamespaceKey.CUSTOM_DURABILITY.setCustomData(res, new int[]{getMaxDurability(), getMaxDurability()});
         CustomNamespaceKey.CUSTOM_TYPE.setCustomData(res, getCustomKey());
         /**
          * IMPORTANT : The lore must be set in the createCustomItem method

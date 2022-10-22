@@ -1,6 +1,5 @@
 package fr.teamunc.customitem_unclib.minecraft.eventlisteners;
 
-import fr.teamunc.base_unclib.utils.helpers.Message;
 import fr.teamunc.customitem_unclib.CustomItemLib;
 import fr.teamunc.customitem_unclib.models.CustomNamespaceKey;
 import org.bukkit.NamespacedKey;
@@ -12,10 +11,8 @@ import org.bukkit.event.enchantment.EnchantItemEvent;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.event.inventory.PrepareAnvilEvent;
-import org.bukkit.event.inventory.PrepareItemCraftEvent;
 import org.bukkit.inventory.GrindstoneInventory;
 import org.bukkit.inventory.ItemStack;
-import org.bukkit.inventory.meta.ItemMeta;
 
 import java.util.*;
 

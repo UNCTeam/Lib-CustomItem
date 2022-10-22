@@ -28,7 +28,7 @@ public class UNCCustomSwordType extends UNCCustomType {
     public ItemStack createCustomItem(int amount) {
         ItemStack res = new ItemStack(getBukkitMaterial(), amount);
 
-        ItemMeta meta = createCustomItemMeta();
+        ItemMeta meta = createCustomItemMeta(true);
 
         CustomNamespaceKey.CUSTOM_ATTACK_DAMAGE.setCustomData(meta, getAttackDamage());
         CustomNamespaceKey.CUSTOM_DISPLAYED_ATTACK_DAMAGE.setCustomData(meta, getAttackDamage());
