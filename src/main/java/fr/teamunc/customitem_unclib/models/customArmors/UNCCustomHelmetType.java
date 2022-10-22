@@ -23,10 +23,4 @@ public class UNCCustomHelmetType extends UNCCustomArmorType {
     public static UNCCustomHelmetTypeBuilder builder(String customKey) {
         return new UNCCustomHelmetTypeBuilder().customKey(customKey);
     }
-
-    @Override
-    public ItemStack createCustomItem(int amount) {
-        return null;
-    }
-
 }

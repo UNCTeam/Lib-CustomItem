@@ -24,9 +24,4 @@ public class UNCCustomBootsType extends UNCCustomArmorType {
     public static UNCCustomBootsTypeBuilder builder(String customKey) {
         return new UNCCustomBootsTypeBuilder().customKey(customKey);
     }
-
-    @Override
-    public ItemStack createCustomItem(int amount) {
-        return null;
-    }
 }

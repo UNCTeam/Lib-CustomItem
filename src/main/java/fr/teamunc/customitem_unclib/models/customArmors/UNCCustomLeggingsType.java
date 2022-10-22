@@ -18,9 +18,4 @@ public class UNCCustomLeggingsType extends UNCCustomArmorType {
     public static UNCCustomLeggingsTypeBuilder builder(String customKey) {
         return new UNCCustomLeggingsTypeBuilder().customKey(customKey);
     }
-
-    @Override
-    public ItemStack createCustomItem(int amount) {
-        return null;
-    }
 }

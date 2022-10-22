@@ -24,10 +24,4 @@ public class UNCCustomChestplateType extends UNCCustomArmorType {
     public static UNCCustomChestplateTypeBuilder builder(String customKey) {
         return new UNCCustomChestplateTypeBuilder().customKey(customKey);
     }
-
-    @Override
-    public ItemStack createCustomItem(int amount) {
-        return null;
-    }
-
 }
