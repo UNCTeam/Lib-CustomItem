@@ -17,13 +17,4 @@ public class UNCCustomStaticType extends UNCCustomType {
     public static UNCCustomStaticType.UNCCustomStaticTypeBuilder builder(String customKey) {
         return new UNCCustomStaticType.UNCCustomStaticTypeBuilder().customKey(customKey);
     }
-
-    @Override
-    public ItemStack createCustomItem(int amount) {
-        ItemStack res = new ItemStack(getBukkitMaterial(), amount);
-        ItemMeta meta = createCustomItemMeta();
-        res.setItemMeta(meta);
-
-        return res;
-    }
 }

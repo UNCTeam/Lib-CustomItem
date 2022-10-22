@@ -37,6 +37,7 @@ public class CustomItemCommands implements CommandExecutor {
                                 CustomItemLib.getUNCCustomItemController().giveCustomItem(player, args[2], amount);
                                 Message.Get().sendMessage("CustomItem " + args[2] + " given to " + args[1] + "!", sender, false);
                             } catch (Exception e) {
+                                Message.Get().broadcastMessageToConsole(e.getMessage());
                                 Message.Get().sendMessage("CustomItem " + args[2] + " not found!", sender, true);
                             }
                         } catch (NumberFormatException e) {
