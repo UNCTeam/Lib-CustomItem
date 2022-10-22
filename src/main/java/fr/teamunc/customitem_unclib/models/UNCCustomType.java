@@ -28,7 +28,17 @@ public abstract class UNCCustomType {
 
     private UNCAction action;
 
-    public abstract ItemStack createCustomItem(int amount);
+    public ItemStack createCustomItem(int amount) {
+        ItemStack res = new ItemStack(getBukkitMaterial(), amount);
+        ItemMeta meta = createCustomItemMeta();
+
+        HashMap<CustomNamespaceKey, List<String>> data = new HashMap<>();
+        updateLores(meta, data);
+
+        res.setItemMeta(meta);
+
+        return res;
+    }
 
     protected ItemMeta createCustomItemMeta() {
         ItemMeta res = new ItemStack(getBukkitMaterial()).getItemMeta();

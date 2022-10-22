@@ -12,18 +12,19 @@ public class CustomEventListener implements Listener {
 
     @EventHandler
     public void onItemUsed(PlayerInteractEvent event) {
-        if (!CustomItemLib.isInit()) {
-            return ;
+        if (event.getItem() == null || !CustomItemLib.isInit()) {
+            return;
         }
 
-        if (event.getItem() == null || !CustomNamespaceKey.CUSTOM_TYPE.hasCustomData(event.getItem())) {
-            return ;
-        }
+        ItemStack item = event.getPlayer().getInventory().getItemInMainHand();
+
+        if (item.getItemMeta() == null || !CustomNamespaceKey.CUSTOM_TYPE.hasCustomData(item)) return;
 
         String customType = CustomNamespaceKey.CUSTOM_TYPE.getCustomData(event.getItem());
 
         if (CustomItemLib.getUNCCustomItemController().getCustomItemType(customType).getAction() != null) {
-            CustomItemLib.getUNCCustomItemController().getCustomItemType(customType).getAction().execute(event);
+            int durabilityConsumed = CustomItemLib.getUNCCustomItemController().getCustomItemType(customType).getAction().execute(event);
+            if (durabilityConsumed != 0) CustomItemLib.getUNCCustomItemController().changeDurability(item, event.getPlayer(), durabilityConsumed);
         }
 
     }
@@ -43,8 +44,8 @@ public class CustomEventListener implements Listener {
         String customType = CustomNamespaceKey.CUSTOM_TYPE.getCustomData(item);
 
         if (CustomItemLib.getUNCCustomItemController().getCustomItemType(customType).getAction() != null) {
-            CustomItemLib.getUNCCustomItemController().getCustomItemType(customType).getAction().execute(event);
+            int durabilityConsumed = CustomItemLib.getUNCCustomItemController().getCustomItemType(customType).getAction().execute(event);
+            if (durabilityConsumed != 0) CustomItemLib.getUNCCustomItemController().changeDurability(item, event.getPlayer(), durabilityConsumed);
         }
-
     }
 }

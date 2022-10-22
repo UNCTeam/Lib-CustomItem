@@ -5,6 +5,7 @@ import fr.teamunc.customitem_unclib.models.UNCCustomType;
 
 import org.bukkit.Bukkit;
 import org.bukkit.NamespacedKey;
+import org.bukkit.Sound;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.Recipe;
@@ -76,6 +77,7 @@ public class UNCCustomItemController {
             this.updateLores(item,new HashMap<>());
 
         } else {
+            player.playSound(player.getLocation(), Sound.ITEM_SHIELD_BREAK, 1.0f, 1.0f);
             player.getInventory().remove(item);
         }
     }
