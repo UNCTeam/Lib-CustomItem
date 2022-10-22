@@ -18,7 +18,9 @@ public enum CustomNamespaceKey {
     CUSTOM_DISPLAYED_ATTACK_DAMAGE("custom_displayed_attackdamage", PersistentDataType.DOUBLE, "§r§2 %s Attack Damage", true),
     CUSTOM_DISPLAYED_ARMOR("custom_displayed_armor", PersistentDataType.INTEGER, "§r§9+%s Armor", true),
     CUSTOM_DISPLAYED_ARMOR_TOUGHNESS("custom_displayed_armor_toughness", PersistentDataType.INTEGER, "§r§9+%s Armor Toughness", true),
-    CUSTOM_DISPLAYED_ARMOR_KNOCKBACK("custom_displayed_armor_knockback", PersistentDataType.INTEGER, "§r§9+%s Knockback Resistance", true);
+    CUSTOM_DISPLAYED_ARMOR_KNOCKBACK("custom_displayed_armor_knockback", PersistentDataType.INTEGER, "§r§9+%s Knockback Resistance", true),
+    CUSTOM_FOOD("custom_food", PersistentDataType.INTEGER, "§r§2 %s Food", true),
+    CUSTOM_SATURATION("custom_saturation", PersistentDataType.FLOAT, "§r§2 %s Saturation", true);
 
 
     private final String key;

@@ -38,7 +38,7 @@ public abstract class UNCCustomArmorType extends UNCCustomType {
     public ItemStack createCustomItem(int amount) {
         ItemStack res = new ItemStack(getBukkitMaterial(), amount);
 
-        ItemMeta meta = createCustomItemMeta();
+        ItemMeta meta = createCustomItemMeta(true);
         val metaLeather = (LeatherArmorMeta) meta;
 
         metaLeather.setColor(Color.fromRGB(255, 255, 256 - getModelData()));
