@@ -10,8 +10,8 @@ import java.util.ArrayList;
 public class UNCCustomLeggingsType extends UNCCustomArmorType {
 
     @Builder
-    public UNCCustomLeggingsType(String name, ArrayList<String> lore, int modelData, int maxDurability, boolean unbreakable, String customKey, UNCAction action) {
-        super(name, lore, modelData, maxDurability, unbreakable, customKey, Material.LEATHER_LEGGINGS, action);
+    public UNCCustomLeggingsType(String name, ArrayList<String> lore, int modelData, int maxDurability, boolean unbreakable, int armor, int armorToughness, int knockbackResistance, String customKey, UNCAction action) {
+        super(name, lore, modelData, maxDurability, unbreakable, armor, armorToughness, knockbackResistance, customKey, Material.LEATHER_LEGGINGS, action);
     }
 
     public static UNCCustomLeggingsTypeBuilder builder(String customKey) {

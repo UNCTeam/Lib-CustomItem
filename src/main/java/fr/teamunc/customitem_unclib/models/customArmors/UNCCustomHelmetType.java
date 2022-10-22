@@ -16,8 +16,8 @@ import java.util.List;
 public class UNCCustomHelmetType extends UNCCustomArmorType {
 
     @Builder
-    public UNCCustomHelmetType(String name, ArrayList<String> lore, int modelData, int maxDurability, boolean unbreakable, String customKey, UNCAction action) {
-        super(name, lore, modelData, maxDurability, unbreakable, customKey, Material.LEATHER_HELMET, action);
+    public UNCCustomHelmetType(String name, ArrayList<String> lore, int modelData, int maxDurability, boolean unbreakable, int armor, int armorToughness, int knockbackResistance, String customKey, UNCAction action) {
+        super(name, lore, modelData, maxDurability, unbreakable, armor, armorToughness, knockbackResistance, customKey, Material.LEATHER_HELMET, action);
     }
 
     public static UNCCustomHelmetTypeBuilder builder(String customKey) {

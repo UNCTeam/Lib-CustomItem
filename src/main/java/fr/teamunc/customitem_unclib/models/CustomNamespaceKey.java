@@ -16,7 +16,10 @@ public enum CustomNamespaceKey {
     CUSTOM_UNBREAKABLE("custom_unbreakable", PersistentDataType.BYTE, "§r§7Unbreakable", false),
     CUSTOM_ATTACK_DAMAGE("custom_attackdamage", PersistentDataType.DOUBLE, "", false),
     CUSTOM_DISPLAYED_ATTACK_DAMAGE("custom_displayed_attackdamage", PersistentDataType.DOUBLE, "§r§2 %s Attack Damage", true),
-    CUSTOM_ATTACK_SPEED("custom_attackspeed", PersistentDataType.DOUBLE, "§r§2 %s Attack Speed", false);
+    CUSTOM_DISPLAYED_ARMOR("custom_displayed_armor", PersistentDataType.INTEGER, "§r§9+%s Armor", true),
+    CUSTOM_DISPLAYED_ARMOR_TOUGHNESS("custom_displayed_armor_toughness", PersistentDataType.INTEGER, "§r§9+%s Armor Toughness", true),
+    CUSTOM_DISPLAYED_ARMOR_KNOCKBACK("custom_displayed_armor_knockback", PersistentDataType.INTEGER, "§r§9+%s Knockback Resistance", true);
+
 
     private final String key;
     @Getter

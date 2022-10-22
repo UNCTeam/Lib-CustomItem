@@ -10,8 +10,8 @@ import java.util.ArrayList;
 public class UNCCustomChestplateType extends UNCCustomArmorType {
 
     @Builder
-    public UNCCustomChestplateType(String name, ArrayList<String> lore, int modelData, int maxDurability, boolean unbreakable, String customKey, UNCAction action) {
-        super(name, lore, modelData, maxDurability, unbreakable, customKey, Material.LEATHER_CHESTPLATE, action);
+    public UNCCustomChestplateType(String name, ArrayList<String> lore, int modelData, int maxDurability, boolean unbreakable, int armor, int armorToughness, int knockbackResistance, String customKey, UNCAction action) {
+        super(name, lore, modelData, maxDurability, unbreakable, armor, armorToughness, knockbackResistance, customKey, Material.LEATHER_CHESTPLATE, action);
     }
 
     public static UNCCustomChestplateTypeBuilder builder(String customKey) {
