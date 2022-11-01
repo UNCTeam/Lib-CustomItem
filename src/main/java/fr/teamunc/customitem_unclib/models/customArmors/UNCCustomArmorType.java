@@ -52,7 +52,7 @@ public abstract class UNCCustomArmorType extends UNCCustomType {
         List<String> armorKnockbackInfo = new ArrayList<>();
         armorKnockbackInfo.add("" + getArmorKnockback());
 
-        EnumMap<CustomNamespaceKey, List<String>> data = new EnumMap<>(CustomNamespaceKey.class);
+        HashMap<CustomNamespaceKey, List<String>> data = new HashMap<>();
         data.put(CustomNamespaceKey.CUSTOM_DISPLAYED_ARMOR, armorInfo);
         data.put(CustomNamespaceKey.CUSTOM_DISPLAYED_ARMOR_TOUGHNESS, armorToughnessInfo);
         data.put(CustomNamespaceKey.CUSTOM_DISPLAYED_ARMOR_KNOCKBACK, armorKnockbackInfo);

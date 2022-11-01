@@ -13,7 +13,6 @@ import org.bukkit.inventory.meta.Damageable;
 import org.bukkit.inventory.meta.ItemMeta;
 
 import java.util.ArrayList;
-import java.util.EnumMap;
 import java.util.HashMap;
 import java.util.List;
 
@@ -75,7 +74,7 @@ public class UNCCustomItemController {
 
             item.setItemMeta(meta);
 
-            this.updateLores(item,new EnumMap<>(CustomNamespaceKey.class));
+            this.updateLores(item,new HashMap<>());
 
         } else {
             player.playSound(player.getLocation(), Sound.ITEM_SHIELD_BREAK, 1.0f, 1.0f);
@@ -83,7 +82,7 @@ public class UNCCustomItemController {
         }
     }
 
-    public void updateLores(ItemStack result, EnumMap<CustomNamespaceKey, List<String>> newDataLore) {
+    public void updateLores(ItemStack result, HashMap<CustomNamespaceKey, List<String>> newDataLore) {
         ItemMeta meta = result.getItemMeta();
         String customType = CustomNamespaceKey.CUSTOM_TYPE.getCustomData(result);
 

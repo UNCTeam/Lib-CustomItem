@@ -7,7 +7,6 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 
 import java.util.ArrayList;
-import java.util.EnumMap;
 import java.util.HashMap;
 import java.util.List;
 
@@ -37,7 +36,7 @@ public class UNCCustomSwordType extends UNCCustomType {
         List<String> attackdamage = new ArrayList<>();
         attackdamage.add("" + getAttackDamage());
 
-        EnumMap<CustomNamespaceKey, List<String>> data = new EnumMap<>(CustomNamespaceKey.class);
+        HashMap<CustomNamespaceKey, List<String>> data = new HashMap<>();
         data.put(CustomNamespaceKey.CUSTOM_DISPLAYED_ATTACK_DAMAGE, attackdamage);
 
         updateLores(meta, data);

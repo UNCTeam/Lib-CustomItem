@@ -41,7 +41,7 @@ public class CustomItemLib {
         }
     }
 
-    public static void initGameListeners(CustomItemUNCLib customItemUncLib) {
+    public static void initGameListeners(CustomItem_UNCLib customItemUncLib) {
         customItemUncLib.getServer().getPluginManager().registerEvents(new CraftListener(), customItemUncLib);
         customItemUncLib.getServer().getPluginManager().registerEvents(new DurabilityListener(), customItemUncLib);
         customItemUncLib.getServer().getPluginManager().registerEvents(new DamageListener(), customItemUncLib);
