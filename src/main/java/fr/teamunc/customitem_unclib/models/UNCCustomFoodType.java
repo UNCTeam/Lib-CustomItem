@@ -7,6 +7,7 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 
 import java.util.ArrayList;
+import java.util.EnumMap;
 import java.util.HashMap;
 import java.util.List;
 
@@ -40,7 +41,7 @@ public class UNCCustomFoodType extends UNCCustomType {
         List<String> customSaturation = new ArrayList<>();
         customSaturation.add("" + getSaturation());
 
-        HashMap<CustomNamespaceKey, List<String>> data = new HashMap<>();
+        EnumMap<CustomNamespaceKey, List<String>> data = new EnumMap<>(CustomNamespaceKey.class);
         data.put(CustomNamespaceKey.CUSTOM_FOOD, customFood);
         data.put(CustomNamespaceKey.CUSTOM_SATURATION, customSaturation);
 

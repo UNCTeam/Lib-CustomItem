@@ -9,6 +9,7 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 
 import java.util.ArrayList;
+import java.util.EnumMap;
 import java.util.HashMap;
 import java.util.List;
 
@@ -32,7 +33,7 @@ public abstract class UNCCustomType {
         ItemStack res = new ItemStack(getBukkitMaterial(), amount);
         ItemMeta meta = createCustomItemMeta(true);
 
-        HashMap<CustomNamespaceKey, List<String>> data = new HashMap<>();
+        EnumMap<CustomNamespaceKey, List<String>> data = new EnumMap<>(CustomNamespaceKey.class);
         updateLores(meta, data);
 
         res.setItemMeta(meta);
@@ -57,7 +58,7 @@ public abstract class UNCCustomType {
         return res;
     }
 
-    protected ArrayList<String> getBaseLores(HashMap<CustomNamespaceKey, List<String>> data) {
+    protected ArrayList<String> getBaseLores(EnumMap<CustomNamespaceKey, List<String>> data) {
         ArrayList<String> res = new ArrayList<>(getLore());
         res.add("");
 
@@ -74,7 +75,7 @@ public abstract class UNCCustomType {
         return res;
     }
 
-    public void updateLores(ItemMeta meta, HashMap<CustomNamespaceKey, List<String>> data) {
+    public void updateLores(ItemMeta meta, EnumMap<CustomNamespaceKey, List<String>> data) {
         // refill with default lores
         CustomNamespaceKey.refillEmptyDataLore(data, meta);
 

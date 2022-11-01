@@ -1,4 +1,4 @@
-package fr.teamunc.customitem_unclib.minecraft.commandsExecutor.commandsTab;
+package fr.teamunc.customitem_unclib.minecraft.commands_executor.commands_tab;
 
 import fr.teamunc.base_unclib.models.libtools.CommandsTab;
 import fr.teamunc.customitem_unclib.CustomItemLib;

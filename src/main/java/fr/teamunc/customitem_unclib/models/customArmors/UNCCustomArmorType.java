@@ -15,10 +15,7 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.inventory.meta.LeatherArmorMeta;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.UUID;
+import java.util.*;
 
 @Getter
 public abstract class UNCCustomArmorType extends UNCCustomType {
@@ -27,7 +24,7 @@ public abstract class UNCCustomArmorType extends UNCCustomType {
     private int armorToughness;
     private int armorKnockback;
 
-    public UNCCustomArmorType(String name, ArrayList<String> lore, int modelData, int maxDurability, boolean unbreakable, int armor, int armorToughness, int armorKnockback, String customKey, Material bukkitMaterial, UNCAction action) {
+    protected UNCCustomArmorType(String name, ArrayList<String> lore, int modelData, int maxDurability, boolean unbreakable, int armor, int armorToughness, int armorKnockback, String customKey, Material bukkitMaterial, UNCAction action) {
         super(name, lore, modelData, maxDurability, unbreakable, customKey, bukkitMaterial, action);
         this.armor = armor;
         this.armorToughness = armorToughness;
@@ -55,7 +52,7 @@ public abstract class UNCCustomArmorType extends UNCCustomType {
         List<String> armorKnockbackInfo = new ArrayList<>();
         armorKnockbackInfo.add("" + getArmorKnockback());
 
-        HashMap<CustomNamespaceKey, List<String>> data = new HashMap<>();
+        EnumMap<CustomNamespaceKey, List<String>> data = new EnumMap<>(CustomNamespaceKey.class);
         data.put(CustomNamespaceKey.CUSTOM_DISPLAYED_ARMOR, armorInfo);
         data.put(CustomNamespaceKey.CUSTOM_DISPLAYED_ARMOR_TOUGHNESS, armorToughnessInfo);
         data.put(CustomNamespaceKey.CUSTOM_DISPLAYED_ARMOR_KNOCKBACK, armorKnockbackInfo);

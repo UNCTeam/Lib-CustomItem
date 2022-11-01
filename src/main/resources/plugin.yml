@@ -1,6 +1,6 @@
-name: CustomItem_UNCLib
+name: CustomItemUNCLib
 version: '${project.version}'
-main: fr.teamunc.customitem_unclib.CustomItem_UNCLib
+main: fr.teamunc.customitem_unclib.CustomItemUNCLib
 api-version: 1.19
 prefix: UNC-CustomItem
 depend: [ Base_UNCLib ]

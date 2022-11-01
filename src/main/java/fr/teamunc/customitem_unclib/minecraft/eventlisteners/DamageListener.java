@@ -49,7 +49,7 @@ public class DamageListener implements Listener {
 
                     List<String> newAttackDamage = new ArrayList<>();
                     newAttackDamage.add("" + (baseDamage + extraDamage));
-                    HashMap<CustomNamespaceKey, List<String>> data = new HashMap<>();
+                    EnumMap<CustomNamespaceKey, List<String>> data = new EnumMap<>(CustomNamespaceKey.class);
                     data.put(CustomNamespaceKey.CUSTOM_DISPLAYED_ATTACK_DAMAGE, newAttackDamage);
 
                     CustomItemLib.getUNCCustomItemController().updateLores(item, data);
@@ -77,7 +77,7 @@ public class DamageListener implements Listener {
 
             result.setItemMeta(CustomNamespaceKey.CUSTOM_DISPLAYED_ATTACK_DAMAGE.setCustomData(result.getItemMeta(), newDamage));
 
-            CustomItemLib.getUNCCustomItemController().updateLores(result, new HashMap<>());
+            CustomItemLib.getUNCCustomItemController().updateLores(result, new EnumMap<>(CustomNamespaceKey.class));
         }
     }
 
@@ -89,7 +89,7 @@ public class DamageListener implements Listener {
             if (item == null || item.getItemMeta() == null || !CustomNamespaceKey.CUSTOM_TYPE.hasCustomData(item) || !CustomNamespaceKey.CUSTOM_DISPLAYED_ATTACK_DAMAGE.hasCustomData(item)) return;
 
             item.setItemMeta(CustomNamespaceKey.CUSTOM_DISPLAYED_ATTACK_DAMAGE.setCustomData(item.getItemMeta(), CustomNamespaceKey.CUSTOM_ATTACK_DAMAGE.getCustomData(item)));
-            CustomItemLib.getUNCCustomItemController().updateLores(item, new HashMap<>());
+            CustomItemLib.getUNCCustomItemController().updateLores(item, new EnumMap<>(CustomNamespaceKey.class));
         }
     }
 }

@@ -22,11 +22,9 @@ public class CraftListener implements Listener {
                 .findFirst()
                 .orElse(null);
 
-        if (customItem != null) {
-            // if Material of the result is same as the material of the recipe
-            if (customItem.getType() == event.getInventory().getResult().getType()) {
-                event.getInventory().setResult(null);
-            }
+        // if Material of the result is same as the material of the recipe
+        if (customItem != null && customItem.getType() == event.getInventory().getResult().getType()) {
+            event.getInventory().setResult(null);
         }
     }
 }

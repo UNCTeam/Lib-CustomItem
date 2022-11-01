@@ -1,8 +1,8 @@
 package fr.teamunc.customitem_unclib;
 
 import fr.teamunc.customitem_unclib.controllers.UNCCustomItemController;
-import fr.teamunc.customitem_unclib.minecraft.commandsExecutor.CustomItemCommands;
-import fr.teamunc.customitem_unclib.minecraft.commandsExecutor.commandsTab.CustomItemGiveTab;
+import fr.teamunc.customitem_unclib.minecraft.commands_executor.CustomItemCommands;
+import fr.teamunc.customitem_unclib.minecraft.commands_executor.commands_tab.CustomItemGiveTab;
 import fr.teamunc.customitem_unclib.minecraft.eventlisteners.*;
 import lombok.Getter;
 import org.bukkit.command.PluginCommand;
@@ -16,6 +16,8 @@ public class CustomItemLib {
 
     @Getter
     private static UNCCustomItemController UNCCustomItemController;
+
+    private CustomItemLib() {}
 
     public static void init(JavaPlugin plugin) {
         CustomItemLib.plugin = plugin;
@@ -39,11 +41,11 @@ public class CustomItemLib {
         }
     }
 
-    public static void initGameListeners(CustomItem_UNCLib customItem_uncLib) {
-        customItem_uncLib.getServer().getPluginManager().registerEvents(new CraftListener(), customItem_uncLib);
-        customItem_uncLib.getServer().getPluginManager().registerEvents(new DurabilityListener(), customItem_uncLib);
-        customItem_uncLib.getServer().getPluginManager().registerEvents(new DamageListener(), customItem_uncLib);
-        customItem_uncLib.getServer().getPluginManager().registerEvents(new CustomEventListener(), customItem_uncLib);
-        customItem_uncLib.getServer().getPluginManager().registerEvents(new ConsumeListener(), customItem_uncLib);
+    public static void initGameListeners(CustomItemUNCLib customItemUncLib) {
+        customItemUncLib.getServer().getPluginManager().registerEvents(new CraftListener(), customItemUncLib);
+        customItemUncLib.getServer().getPluginManager().registerEvents(new DurabilityListener(), customItemUncLib);
+        customItemUncLib.getServer().getPluginManager().registerEvents(new DamageListener(), customItemUncLib);
+        customItemUncLib.getServer().getPluginManager().registerEvents(new CustomEventListener(), customItemUncLib);
+        customItemUncLib.getServer().getPluginManager().registerEvents(new ConsumeListener(), customItemUncLib);
     }
 }

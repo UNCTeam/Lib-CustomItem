@@ -75,7 +75,7 @@ public enum CustomNamespaceKey {
         return String.format(loreBaseRow, value.toArray());
     }
 
-    public static HashMap<CustomNamespaceKey, List<String>> refillEmptyDataLore(HashMap<CustomNamespaceKey, List<String>> data, ItemMeta meta) {
+    public static EnumMap<CustomNamespaceKey, List<String>> refillEmptyDataLore(EnumMap<CustomNamespaceKey, List<String>> data, ItemMeta meta) {
         for (CustomNamespaceKey key : CustomNamespaceKey.values()) {
             if (!data.containsKey(key) && key.hasCustomData(meta)) {
 
