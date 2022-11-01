@@ -31,7 +31,7 @@ public class CustomNamespaceKey<T> {
     private final boolean writeInLore;
 
     CustomNamespaceKey(String key, PersistentDataType<?, T> type, String loreBaseRow, boolean writeInLore) {
-        this.key = key;
+        this.key = "uncitemdata_" + key;
         this.type = type;
         this.loreBaseRow = loreBaseRow;
         this.writeInLore = writeInLore;
