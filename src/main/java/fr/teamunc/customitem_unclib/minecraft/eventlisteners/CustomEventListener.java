@@ -2,9 +2,12 @@ package fr.teamunc.customitem_unclib.minecraft.eventlisteners;
 
 import fr.teamunc.customitem_unclib.CustomItemLib;
 import fr.teamunc.customitem_unclib.models.CustomNamespaceKey;
+import org.bukkit.entity.LivingEntity;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.block.BlockBreakEvent;
+import org.bukkit.event.entity.EntityDamageByEntityEvent;
+import org.bukkit.event.entity.EntityDamageEvent;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.event.player.PlayerItemConsumeEvent;
 import org.bukkit.inventory.ItemStack;
@@ -63,5 +66,31 @@ public class CustomEventListener implements Listener {
             int durabilityConsumed = CustomItemLib.getUNCCustomItemController().getCustomItemType(customType).getAction().execute(event);
             if (durabilityConsumed != 0) CustomItemLib.getUNCCustomItemController().changeDurability(item, event.getPlayer(), durabilityConsumed);
         }
+    }
+
+    @EventHandler
+    public void onPlayerDamageDone(EntityDamageByEntityEvent event) {
+        if (!CustomItemLib.isInit()) {
+            return;
+        }
+
+        if (event.getCause().equals(EntityDamageEvent.DamageCause.ENTITY_ATTACK) && event.getDamager() instanceof LivingEntity ) {
+            LivingEntity damager = (LivingEntity) event.getDamager();
+
+            if (damager.getEquipment() == null) return;
+
+            ItemStack item = damager.getEquipment().getItemInMainHand();
+
+            if (item == null || !CustomNamespaceKey.CUSTOM_TYPE.hasCustomData(item)) {
+                return;
+            }
+
+            String customType = CustomNamespaceKey.CUSTOM_TYPE.getCustomData(item);
+
+            if (CustomItemLib.getUNCCustomItemController().getCustomItemType(customType).getAction() != null) {
+                CustomItemLib.getUNCCustomItemController().getCustomItemType(customType).getAction().execute(event);
+            }
+        }
+
     }
 }
