@@ -19,11 +19,6 @@ public class ConsumeListener implements Listener {
 
         if (originItem.getItemMeta() == null || !CustomNamespaceKey.CUSTOM_TYPE.hasCustomData(originItem)) return;
 
-        String customType = CustomNamespaceKey.CUSTOM_TYPE.getCustomData(originItem);
-        if (CustomItemLib.getUNCCustomItemController().getCustomItemType(customType).getAction() != null) {
-            CustomItemLib.getUNCCustomItemController().getCustomItemType(customType).getAction();
-        }
-
         if (CustomNamespaceKey.CUSTOM_FOOD.hasCustomData(originItem)) {
             int customFood = CustomNamespaceKey.CUSTOM_FOOD.getCustomData(originItem);
             int newVal = player.getFoodLevel() + customFood;

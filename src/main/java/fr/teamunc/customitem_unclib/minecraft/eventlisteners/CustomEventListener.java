@@ -6,6 +6,7 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.block.BlockBreakEvent;
 import org.bukkit.event.player.PlayerInteractEvent;
+import org.bukkit.event.player.PlayerItemConsumeEvent;
 import org.bukkit.inventory.ItemStack;
 
 public class CustomEventListener implements Listener {
@@ -27,6 +28,21 @@ public class CustomEventListener implements Listener {
             if (durabilityConsumed != 0) CustomItemLib.getUNCCustomItemController().changeDurability(item, event.getPlayer(), durabilityConsumed);
         }
 
+    }
+
+    @EventHandler
+    public void onConsumeEvent(PlayerItemConsumeEvent event) {
+        if (!CustomItemLib.isInit())
+            return;
+
+        ItemStack originItem = event.getItem();
+
+        if (originItem.getItemMeta() == null || !CustomNamespaceKey.CUSTOM_TYPE.hasCustomData(originItem)) return;
+
+        String customType = CustomNamespaceKey.CUSTOM_TYPE.getCustomData(originItem);
+        if (CustomItemLib.getUNCCustomItemController().getCustomItemType(customType).getAction() != null) {
+            CustomItemLib.getUNCCustomItemController().getCustomItemType(customType).getAction().execute(event);
+        }
     }
 
     @EventHandler
