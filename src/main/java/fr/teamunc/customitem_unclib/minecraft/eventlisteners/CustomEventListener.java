@@ -3,6 +3,7 @@ package fr.teamunc.customitem_unclib.minecraft.eventlisteners;
 import fr.teamunc.customitem_unclib.CustomItemLib;
 import fr.teamunc.customitem_unclib.models.CustomNamespaceKey;
 import org.bukkit.entity.LivingEntity;
+import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.block.BlockBreakEvent;
@@ -88,7 +89,11 @@ public class CustomEventListener implements Listener {
             String customType = CustomNamespaceKey.CUSTOM_TYPE.getCustomData(item);
 
             if (CustomItemLib.getUNCCustomItemController().getCustomItemType(customType).getAction() != null) {
-                CustomItemLib.getUNCCustomItemController().getCustomItemType(customType).getAction().execute(event);
+                int durabilityConsumed =CustomItemLib.getUNCCustomItemController().getCustomItemType(customType).getAction().execute(event);
+                if (durabilityConsumed != 0 && event.getDamager() instanceof Player) {
+                    Player eventDamager = (Player) event.getDamager();
+                    CustomItemLib.getUNCCustomItemController().changeDurability(item, eventDamager, durabilityConsumed);
+                }
             }
         }
 

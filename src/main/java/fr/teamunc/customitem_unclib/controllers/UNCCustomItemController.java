@@ -76,7 +76,7 @@ public class UNCCustomItemController {
 
             this.updateLores(item,new HashMap<>());
 
-        } else {
+        } else if (player != null){
             player.playSound(player.getLocation(), Sound.ITEM_SHIELD_BREAK, 1.0f, 1.0f);
             player.getInventory().remove(item);
         }
