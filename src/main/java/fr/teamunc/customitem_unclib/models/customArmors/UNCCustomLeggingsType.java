@@ -4,6 +4,8 @@ import fr.teamunc.customitem_unclib.models.UNCAction;
 import lombok.Builder;
 import lombok.Getter;
 import org.bukkit.Material;
+import org.bukkit.inventory.EquipmentSlot;
+
 import java.util.ArrayList;
 
 @Getter
@@ -11,7 +13,7 @@ public class UNCCustomLeggingsType extends UNCCustomArmorType {
 
     @Builder
     public UNCCustomLeggingsType(String name, ArrayList<String> lore, int modelData, int maxDurability, boolean unbreakable, int armor, int armorToughness, int knockbackResistance, String customKey, UNCAction action) {
-        super(name, lore, modelData, maxDurability, unbreakable, armor, armorToughness, knockbackResistance, customKey, Material.LEATHER_LEGGINGS, action);
+        super(name, lore, EquipmentSlot.LEGS, modelData, maxDurability, unbreakable, armor, armorToughness, knockbackResistance, customKey, Material.LEATHER_LEGGINGS, action);
     }
 
     public static UNCCustomLeggingsTypeBuilder builder(String customKey) {

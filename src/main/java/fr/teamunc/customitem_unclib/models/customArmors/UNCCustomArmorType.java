@@ -19,13 +19,14 @@ import java.util.*;
 
 @Getter
 public abstract class UNCCustomArmorType extends UNCCustomType {
-
+    private EquipmentSlot equipmentSlot;
     private int armor;
     private int armorToughness;
     private int armorKnockback;
 
-    protected UNCCustomArmorType(String name, ArrayList<String> lore, int modelData, int maxDurability, boolean unbreakable, int armor, int armorToughness, int armorKnockback, String customKey, Material bukkitMaterial, UNCAction action) {
+    protected UNCCustomArmorType(String name, ArrayList<String> lore,EquipmentSlot equipmentSlot, int modelData, int maxDurability, boolean unbreakable, int armor, int armorToughness, int armorKnockback, String customKey, Material bukkitMaterial, UNCAction action) {
         super(name, lore, modelData, maxDurability, unbreakable, customKey, bukkitMaterial, action);
+        this.equipmentSlot = equipmentSlot;
         this.armor = armor;
         this.armorToughness = armorToughness;
         this.armorKnockback = armorKnockback;
@@ -59,9 +60,9 @@ public abstract class UNCCustomArmorType extends UNCCustomType {
         updateLores(meta, data);
 
         // set attributes of the armor
-        meta.addAttributeModifier(Attribute.GENERIC_ARMOR, new AttributeModifier(UUID.randomUUID(),"generic.armor",Double.parseDouble(getArmor()+""), AttributeModifier.Operation.ADD_NUMBER));
-        meta.addAttributeModifier(Attribute.GENERIC_ARMOR_TOUGHNESS, new AttributeModifier(UUID.randomUUID(),"generic.armor_toughness",Double.parseDouble(getArmorToughness()+""), AttributeModifier.Operation.ADD_NUMBER));
-        meta.addAttributeModifier(Attribute.GENERIC_KNOCKBACK_RESISTANCE, new AttributeModifier(UUID.randomUUID(),"generic.knockback_resistance",Double.parseDouble(getArmorKnockback()+""), AttributeModifier.Operation.ADD_NUMBER));
+        meta.addAttributeModifier(Attribute.GENERIC_ARMOR, new AttributeModifier(UUID.randomUUID(),"generic.armor",Double.parseDouble(getArmor()+""), AttributeModifier.Operation.ADD_NUMBER, getEquipmentSlot()));
+        meta.addAttributeModifier(Attribute.GENERIC_ARMOR_TOUGHNESS, new AttributeModifier(UUID.randomUUID(),"generic.armor_toughness",Double.parseDouble(getArmorToughness()+""), AttributeModifier.Operation.ADD_NUMBER, getEquipmentSlot()));
+        meta.addAttributeModifier(Attribute.GENERIC_KNOCKBACK_RESISTANCE, new AttributeModifier(UUID.randomUUID(),"generic.knockback_resistance",Double.parseDouble(getArmorKnockback()+""), AttributeModifier.Operation.ADD_NUMBER, getEquipmentSlot()));
 
 
 
