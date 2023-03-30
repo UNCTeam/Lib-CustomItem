@@ -13,5 +13,8 @@ public final class CustomItem_UNCLib extends JavaPlugin {
     @Override
     public void onDisable() {
         // Plugin shutdown logic
+        if (CustomItemLib.isInit()) {
+            CustomItemLib.getUNCCustomItemController().stopCustomItemActionTimer();
+        }
     }
 }

@@ -2,6 +2,7 @@ package fr.teamunc.customitem_unclib.models.customArmors;
 
 import fr.teamunc.customitem_unclib.models.CustomNamespaceKey;
 import fr.teamunc.customitem_unclib.models.UNCAction;
+import fr.teamunc.customitem_unclib.models.UNCActionOnTick;
 import fr.teamunc.customitem_unclib.models.UNCCustomType;
 import lombok.Getter;
 import lombok.val;
@@ -24,8 +25,8 @@ public abstract class UNCCustomArmorType extends UNCCustomType {
     private int armorToughness;
     private int armorKnockback;
 
-    protected UNCCustomArmorType(String name, ArrayList<String> lore,EquipmentSlot equipmentSlot, int modelData, int maxDurability, boolean unbreakable, int armor, int armorToughness, int armorKnockback, String customKey, Material bukkitMaterial, UNCAction action) {
-        super(name, lore, modelData, maxDurability, unbreakable, customKey, bukkitMaterial, action);
+    protected UNCCustomArmorType(String name, ArrayList<String> lore, EquipmentSlot equipmentSlot, int modelData, int maxDurability, boolean unbreakable, int armor, int armorToughness, int armorKnockback, String customKey, Material bukkitMaterial, UNCAction action, UNCActionOnTick actionToRun) {
+        super(name, lore, modelData, maxDurability, unbreakable, customKey, bukkitMaterial, action, actionToRun);
         this.equipmentSlot = equipmentSlot;
         this.armor = armor;
         this.armorToughness = armorToughness;

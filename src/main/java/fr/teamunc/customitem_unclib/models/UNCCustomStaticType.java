@@ -12,8 +12,8 @@ import java.util.List;
 public class UNCCustomStaticType extends UNCCustomType {
 
     @Builder
-    public UNCCustomStaticType(String name, ArrayList<String> lore, int modelData, String customKey) {
-        super(name, lore, modelData, 0, false, customKey, Material.STRUCTURE_BLOCK, null);
+    public UNCCustomStaticType(String name, ArrayList<String> lore, int modelData, String customKey, UNCActionOnTick actionToRun) {
+        super(name, lore, modelData, 0, false, customKey, Material.STRUCTURE_BLOCK, null, actionToRun);
     }
 
     public static UNCCustomStaticType.UNCCustomStaticTypeBuilder builder(String customKey) {

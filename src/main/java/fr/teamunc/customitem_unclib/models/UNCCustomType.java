@@ -28,6 +28,8 @@ public abstract class UNCCustomType {
 
     private UNCAction action;
 
+    private final UNCActionOnTick actionToRun;
+
     public ItemStack createCustomItem(int amount) {
         ItemStack res = new ItemStack(getBukkitMaterial(), amount);
         ItemMeta meta = createCustomItemMeta(true);
@@ -50,7 +52,7 @@ public abstract class UNCCustomType {
         CustomNamespaceKey.CUSTOM_UNBREAKABLE.setCustomData(res, (byte) (isUnbreakable() ? 1 : 0));
         if (withDurability) CustomNamespaceKey.CUSTOM_DURABILITY.setCustomData(res, new int[]{getMaxDurability(), getMaxDurability()});
         CustomNamespaceKey.CUSTOM_TYPE.setCustomData(res, getCustomKey());
-        /**
+        /*
          * IMPORTANT : The lore must be set in the createCustomItem method
          */
 

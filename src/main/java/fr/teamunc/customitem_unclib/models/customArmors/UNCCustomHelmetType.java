@@ -2,6 +2,7 @@ package fr.teamunc.customitem_unclib.models.customArmors;
 
 import fr.teamunc.customitem_unclib.models.CustomNamespaceKey;
 import fr.teamunc.customitem_unclib.models.UNCAction;
+import fr.teamunc.customitem_unclib.models.UNCActionOnTick;
 import lombok.Builder;
 import lombok.Getter;
 import org.bukkit.Material;
@@ -17,8 +18,8 @@ import java.util.List;
 public class UNCCustomHelmetType extends UNCCustomArmorType {
 
     @Builder
-    public UNCCustomHelmetType(String name, ArrayList<String> lore, int modelData, int maxDurability, boolean unbreakable, int armor, int armorToughness, int knockbackResistance, String customKey, UNCAction action) {
-        super(name, lore, EquipmentSlot.HEAD, modelData, maxDurability, unbreakable, armor, armorToughness, knockbackResistance, customKey, Material.LEATHER_HELMET, action);
+    public UNCCustomHelmetType(String name, ArrayList<String> lore, int modelData, int maxDurability, boolean unbreakable, int armor, int armorToughness, int knockbackResistance, String customKey, UNCAction action, UNCActionOnTick actionToRun) {
+        super(name, lore, EquipmentSlot.HEAD, modelData, maxDurability, unbreakable, armor, armorToughness, knockbackResistance, customKey, Material.LEATHER_HELMET, action, actionToRun);
     }
 
     public static UNCCustomHelmetTypeBuilder builder(String customKey) {

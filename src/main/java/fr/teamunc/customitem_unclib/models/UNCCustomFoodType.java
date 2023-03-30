@@ -16,8 +16,8 @@ public class UNCCustomFoodType extends UNCCustomType {
     private final float saturation;
 
     @Builder
-    public UNCCustomFoodType(String name, ArrayList<String> lore, int modelData, int maxDurability, boolean unbreakable, int foodLevel, float saturation, String customKey, Material bukkitMaterial, UNCAction action) {
-        super(name, lore, modelData, maxDurability, unbreakable, customKey, bukkitMaterial, action);
+    public UNCCustomFoodType(String name, ArrayList<String> lore, int modelData, int maxDurability, boolean unbreakable, int foodLevel, float saturation, String customKey, Material bukkitMaterial, UNCAction action, UNCActionOnTick actionToRun) {
+        super(name, lore, modelData, maxDurability, unbreakable, customKey, bukkitMaterial, action, actionToRun);
         this.foodLevel = foodLevel;
         this.saturation = saturation;
     }

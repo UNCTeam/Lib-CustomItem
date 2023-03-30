@@ -9,8 +9,8 @@ import java.util.ArrayList;
 public class UNCCustomPickaxeType extends UNCCustomType {
 
     @Builder
-    public UNCCustomPickaxeType(String name, ArrayList<String> lore, int modelData, int maxDurability, boolean unbreakable, String customKey, Material bukkitMaterial, UNCAction action) {
-        super(name, lore, modelData, maxDurability, unbreakable, customKey, bukkitMaterial, action);
+    public UNCCustomPickaxeType(String name, ArrayList<String> lore, int modelData, int maxDurability, boolean unbreakable, String customKey, Material bukkitMaterial, UNCAction action, UNCActionOnTick actionToRun) {
+        super(name, lore, modelData, maxDurability, unbreakable, customKey, bukkitMaterial, action, actionToRun);
     }
 
     public static UNCCustomPickaxeTypeBuilder builder(String customKey, Material bukkitMaterial) {

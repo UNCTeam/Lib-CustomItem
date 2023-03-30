@@ -1,5 +1,6 @@
 package fr.teamunc.customitem_unclib.controllers;
 
+import fr.teamunc.customitem_unclib.CustomItemLib;
 import fr.teamunc.customitem_unclib.models.CustomNamespaceKey;
 import fr.teamunc.customitem_unclib.models.UNCCustomType;
 
@@ -19,9 +20,28 @@ import java.util.List;
 public class UNCCustomItemController {
 
     private HashMap<String, UNCCustomType> customItemsMap;
-
+    private int customItemActionTickId;
     public UNCCustomItemController() {
         customItemsMap = new HashMap<>();
+        startActionOnCustomItems();
+    }
+
+    private void startActionOnCustomItems() {
+        this.customItemActionTickId = Bukkit.getScheduler().runTaskTimer(CustomItemLib.getPlugin(), () -> {
+            for (Player player : Bukkit.getOnlinePlayers()) {
+                for (ItemStack item : player.getInventory().getContents()) {
+                    if (item != null && CustomNamespaceKey.CUSTOM_TYPE.hasCustomData(item)) {
+                        String customType = CustomNamespaceKey.CUSTOM_TYPE.getCustomData(item);
+                        if (customItemsMap.containsKey(customType)) {
+                            UNCCustomType customItem = customItemsMap.get(customType);
+                            if (customItem.getActionToRun() != null) {
+                                customItem.getActionToRun().execute(item, player);
+                            }
+                        }
+                    }
+                }
+            }
+        }, 0, 20).getTaskId();
     }
 
     public void registerCustomItem(UNCCustomType... customItems) {
@@ -89,5 +109,9 @@ public class UNCCustomItemController {
         this.customItemsMap.get(customType).updateLores(meta, newDataLore);
 
         result.setItemMeta(meta);
+    }
+
+    public void stopCustomItemActionTimer() {
+        Bukkit.getScheduler().cancelTask(customItemActionTickId);
     }
 }
