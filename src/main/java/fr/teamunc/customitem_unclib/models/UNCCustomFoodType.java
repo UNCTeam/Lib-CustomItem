@@ -9,6 +9,7 @@ import org.bukkit.inventory.meta.ItemMeta;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @Getter
 public class UNCCustomFoodType extends UNCCustomType {
@@ -16,8 +17,8 @@ public class UNCCustomFoodType extends UNCCustomType {
     private final float saturation;
 
     @Builder
-    public UNCCustomFoodType(String name, ArrayList<String> lore, int modelData, int maxDurability, boolean unbreakable, int foodLevel, float saturation, String customKey, Material bukkitMaterial, UNCAction action, UNCActionOnTick actionToRun) {
-        super(name, lore, modelData, maxDurability, unbreakable, customKey, bukkitMaterial, action, actionToRun);
+    public UNCCustomFoodType(String name, ArrayList<String> lore, int modelData, int maxDurability, boolean unbreakable, int foodLevel, float saturation, String customKey, Material bukkitMaterial, UNCAction action, UNCActionOnTick actionToRun, Map<String, Object> defaultAdditionalInformation) {
+        super(name, lore, modelData, maxDurability, unbreakable, customKey, bukkitMaterial, action, actionToRun, defaultAdditionalInformation);
         this.foodLevel = foodLevel;
         this.saturation = saturation;
     }

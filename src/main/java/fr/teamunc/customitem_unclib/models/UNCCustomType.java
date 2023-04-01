@@ -1,20 +1,26 @@
 package fr.teamunc.customitem_unclib.models;
 
+import fr.teamunc.customitem_unclib.CustomItemLib;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import org.bukkit.Material;
+import org.bukkit.NamespacedKey;
 import org.bukkit.inventory.ItemFlag;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
+import org.bukkit.persistence.PersistentDataContainer;
+import org.bukkit.persistence.PersistentDataType;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @Getter
 @AllArgsConstructor
 public abstract class UNCCustomType {
+
     private String name;
     private ArrayList<String> lore;
     private int modelData;
@@ -29,6 +35,7 @@ public abstract class UNCCustomType {
     private UNCAction action;
 
     private final UNCActionOnTick actionToRun;
+    private final Map<String, Object> defaultAdditionalInformation;
 
     public ItemStack createCustomItem(int amount) {
         ItemStack res = new ItemStack(getBukkitMaterial(), amount);
@@ -56,6 +63,14 @@ public abstract class UNCCustomType {
          * IMPORTANT : The lore must be set in the createCustomItem method
          */
 
+        // add default additional informations
+        if (defaultAdditionalInformation != null) for (Map.Entry<String, Object> keyVal : defaultAdditionalInformation.entrySet()) {
+            if (keyVal.getValue() == null) continue;
+            NamespacedKey namespacedKey = new NamespacedKey(CustomItemLib.getPlugin(), keyVal.getKey());
+            Object value = keyVal.getValue();
+
+            res.getPersistentDataContainer().set(namespacedKey, PersistentDataType.STRING, String.valueOf(value));
+        }
         return res;
     }
 

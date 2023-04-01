@@ -8,12 +8,13 @@ import org.bukkit.inventory.meta.ItemMeta;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class UNCCustomStaticType extends UNCCustomType {
 
     @Builder
-    public UNCCustomStaticType(String name, ArrayList<String> lore, int modelData, String customKey, UNCActionOnTick actionToRun) {
-        super(name, lore, modelData, 0, false, customKey, Material.STRUCTURE_BLOCK, null, actionToRun);
+    public UNCCustomStaticType(String name, ArrayList<String> lore, int modelData, String customKey, UNCActionOnTick actionToRun, Map<String, Object> defaultAdditionalInformation) {
+        super(name, lore, modelData, 0, false, customKey, Material.STRUCTURE_BLOCK, null, actionToRun, defaultAdditionalInformation);
     }
 
     public static UNCCustomStaticType.UNCCustomStaticTypeBuilder builder(String customKey) {

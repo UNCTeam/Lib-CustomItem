@@ -9,14 +9,15 @@ import org.bukkit.inventory.meta.ItemMeta;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @Getter
 public class UNCCustomSwordType extends UNCCustomType {
     private Double attackDamage;
 
     @Builder
-    public UNCCustomSwordType(String name, ArrayList<String> lore, int modelData, int maxDurability, boolean unbreakable, String customKey, double attackDamage, int attackSpeed, UNCAction action, UNCActionOnTick actionToRun) {
-        super(name, lore, modelData, maxDurability, unbreakable, customKey, Material.NETHERITE_SWORD, action, actionToRun);
+    public UNCCustomSwordType(String name, ArrayList<String> lore, int modelData, int maxDurability, boolean unbreakable, String customKey, double attackDamage, int attackSpeed, UNCAction action, UNCActionOnTick actionToRun, Map<String, Object> defaultAdditionalInformation) {
+        super(name, lore, modelData, maxDurability, unbreakable, customKey, Material.NETHERITE_SWORD, action, actionToRun, defaultAdditionalInformation);
         this.attackDamage = attackDamage;
     }
 

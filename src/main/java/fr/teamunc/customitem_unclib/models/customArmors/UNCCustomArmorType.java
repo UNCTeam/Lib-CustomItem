@@ -25,8 +25,8 @@ public abstract class UNCCustomArmorType extends UNCCustomType {
     private int armorToughness;
     private int armorKnockback;
 
-    protected UNCCustomArmorType(String name, ArrayList<String> lore, EquipmentSlot equipmentSlot, int modelData, int maxDurability, boolean unbreakable, int armor, int armorToughness, int armorKnockback, String customKey, Material bukkitMaterial, UNCAction action, UNCActionOnTick actionToRun) {
-        super(name, lore, modelData, maxDurability, unbreakable, customKey, bukkitMaterial, action, actionToRun);
+    protected UNCCustomArmorType(String name, ArrayList<String> lore, EquipmentSlot equipmentSlot, int modelData, int maxDurability, boolean unbreakable, int armor, int armorToughness, int armorKnockback, String customKey, Material bukkitMaterial, UNCAction action, UNCActionOnTick actionToRun, Map<String, Object> defaultAdditionalInformation) {
+        super(name, lore, modelData, maxDurability, unbreakable, customKey, bukkitMaterial, action, actionToRun, defaultAdditionalInformation);
         this.equipmentSlot = equipmentSlot;
         this.armor = armor;
         this.armorToughness = armorToughness;
