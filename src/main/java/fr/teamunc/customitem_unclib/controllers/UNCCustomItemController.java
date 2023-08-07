@@ -4,6 +4,7 @@ import fr.teamunc.customitem_unclib.CustomItemLib;
 import fr.teamunc.customitem_unclib.models.CustomNamespaceKey;
 import fr.teamunc.customitem_unclib.models.UNCCustomType;
 
+import lombok.NonNull;
 import org.bukkit.Bukkit;
 import org.bukkit.NamespacedKey;
 import org.bukkit.Sound;
@@ -12,6 +13,7 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.Recipe;
 import org.bukkit.inventory.meta.Damageable;
 import org.bukkit.inventory.meta.ItemMeta;
+import org.bukkit.persistence.PersistentDataType;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -77,6 +79,29 @@ public class UNCCustomItemController {
 
     public UNCCustomType getCustomItemType(String customKey) {
         return customItemsMap.get(customKey);
+    }
+
+    public void setAdditionalInformations(ItemStack item, String key, @NonNull Object objectData) {
+        ItemMeta meta = item.getItemMeta();
+        NamespacedKey namespaceKey = new NamespacedKey(CustomItemLib.getPlugin(), key);
+        String value = objectData.toString();
+
+        if (meta == null || !meta.getPersistentDataContainer().has(namespaceKey, PersistentDataType.STRING))
+            throw new IllegalStateException("Item "+ item.getType() +" doesn't have the key " + key);
+
+        meta.getPersistentDataContainer().set(namespaceKey, PersistentDataType.STRING, value);
+        item.setItemMeta(meta);
+
+    }
+
+    public String getAdditionalInformations(ItemStack item, String key) {
+        ItemMeta meta = item.getItemMeta();
+        NamespacedKey namespaceKey = new NamespacedKey(CustomItemLib.getPlugin(), key);
+
+        if (meta == null || !meta.getPersistentDataContainer().has(namespaceKey, PersistentDataType.STRING))
+            throw new IllegalStateException("Item "+ item.getType() +" doesn't have the key " + key);
+
+        return meta.getPersistentDataContainer().get(namespaceKey, PersistentDataType.STRING);
     }
 
     public void changeDurability(ItemStack item, Player player, int amount) {

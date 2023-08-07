@@ -17,7 +17,7 @@ public class CustomEventListener implements Listener {
 
     @EventHandler
     public void onItemUsed(PlayerInteractEvent event) {
-        if (event.getItem() == null || !CustomItemLib.isInit()) {
+        if (event.getItem() == null || !CustomItemLib.isInit() || event.isCancelled()) {
             return;
         }
 
@@ -36,7 +36,7 @@ public class CustomEventListener implements Listener {
 
     @EventHandler
     public void onConsumeEvent(PlayerItemConsumeEvent event) {
-        if (!CustomItemLib.isInit())
+        if (!CustomItemLib.isInit() || event.isCancelled())
             return;
 
         ItemStack originItem = event.getItem();
@@ -53,7 +53,7 @@ public class CustomEventListener implements Listener {
     public void onBlockBreak(BlockBreakEvent event) {
         ItemStack item = event.getPlayer().getInventory().getItemInMainHand();
 
-        if (!CustomItemLib.isInit()) {
+        if (!CustomItemLib.isInit() || event.isCancelled()) {
             return;
         }
 
@@ -71,7 +71,7 @@ public class CustomEventListener implements Listener {
 
     @EventHandler
     public void onPlayerDamageDone(EntityDamageByEntityEvent event) {
-        if (!CustomItemLib.isInit()) {
+        if (!CustomItemLib.isInit() || event.isCancelled()) {
             return;
         }
 
